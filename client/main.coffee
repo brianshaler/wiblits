@@ -58,3 +58,8 @@ class @App
 app = @app = new @App()
 
 Template.page.showRoom = -> Session.get "showRoom"
+
+
+Deps.autorun =>
+  $('body').removeClass()
+  $("body").addClass("home")  if Session.get "showRoom"
