@@ -8,7 +8,6 @@ insecure
 preserve-inputs
 coffeescript
 router
-bootstrap
 underscore
 accounts-base
 accounts-twitter
@@ -17,3 +16,4 @@ moment
 twilio-meteor
 accounts-password
 stylus
+bootstrap-3
