@@ -1,11 +1,23 @@
 <head>
-  <title>wiblits</title>
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="/css/font-awesome.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Wiblits</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href='http://fonts.googleapis.com/css?family=Press+Start+2P|Roboto:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
 </head>
 
 <body>
-  {{> root}}
+  <header class='container'>
+    <a class='logo' href='#'>
+    </a>
+    <h1>Wiblits</h1>
+  </header>
+
+  <div class='main'>
+    {{> root}}
+  </div>
 </body>
 
 <template name="root">
@@ -17,6 +29,8 @@
 </template>
 
 <template name="page">
+  {{> header}}
+
   {{#if error}}
     <div class="alert alert-error">{{error}}</div>
   {{/if}}

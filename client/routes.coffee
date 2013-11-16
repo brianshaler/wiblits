@@ -22,5 +22,5 @@
     "/": ->
       Session.set "roomId", null
       Session.set "showRoom", false
-      "page"
+      "home"
     "*": "not_found"
