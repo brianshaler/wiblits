@@ -4,14 +4,6 @@
   {{#if game.started}}
     game started!
   {{else}}
-    {{#if isOwner}}
-      <button class="start-game">Start game</button>
-    {{/if}}
-    <h3>Players</h3>
-    <ul>
-      {{#each players}}
-        <li>{{displayName}}</li>
-      {{/each}}
-    </ul>
+    {{> waiting_room}}
   {{/if}}
 </template>
