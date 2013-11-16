@@ -25,13 +25,11 @@ Deps.autorun ->
   # return if currently playing
   unless game.started and !game.finished
     Session.set "timeLeft", 0
-    Session.set "countdown", 
     return
   
   checkCountdown()
   
   Session.set "timeLeft", timeLeft
-  countdownInterval
   Game.findOne gameId
 
 Template.starting.timeLeft = ->
