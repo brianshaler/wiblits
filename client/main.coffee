@@ -3,6 +3,7 @@ Meteor.subscribe "allUsers"
 
 @initRoutes()
 
+
 class @App
   constructor: ->
     Meteor.startup =>
@@ -53,8 +54,8 @@ class @App
       Session.set "roomId", id
       Session.set "showRoom", true
       Session.set "roomLoading", false
-  
 
 app = @app = new @App()
+
 
 Template.page.showRoom = -> Session.get "showRoom"

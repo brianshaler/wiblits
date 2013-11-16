@@ -1,5 +1,10 @@
 <template name="waiting_room">
   {{#if isOwner}}
+    {{#if room.public}}
+      <button class="make-private">Make private</button>
+    {{else}}
+      <button class="make-public">Make public</button>
+    {{/if}}
     <button class="start-playing">Start playing</button>
   {{/if}}
   <h3>Players</h3>

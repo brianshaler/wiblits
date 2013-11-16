@@ -5,8 +5,10 @@ Meteor.methods
     room.players = [@userId]
     Room.insert room
   
-  privacy: (roomId, makePublic) ->
+  makePublic: (roomId, makePublic) ->
     check makePublic, Boolean
+    
+    console.log "makePublic " + (if makePublic then "true" else "false")
     
     room = Room.findOne roomId
     if !room
