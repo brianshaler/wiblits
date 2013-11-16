@@ -4,6 +4,7 @@
     "twit": {},
     "twitter-api": {},
     "moment": {},
-    "twilio-meteor": {}
+    "twilio-meteor": {},
+    "bootstrap-3": {}
   }
 }

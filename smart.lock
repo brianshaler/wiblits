@@ -6,7 +6,8 @@
       "twit": {},
       "twitter-api": {},
       "moment": {},
-      "twilio-meteor": {}
+      "twilio-meteor": {},
+      "bootstrap-3": {}
     },
     "packages": {
       "router": {
@@ -33,6 +34,11 @@
         "git": "http://github.com/andreioprisan/twilio-meteor.git",
         "tag": "v1.1.0",
         "commit": "7f36ec52fc334caf8b740320524df62afce890e1"
+      },
+      "bootstrap-3": {
+        "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
+        "tag": "v0.3.6",
+        "commit": "711dbcabe333c8714298b2fd1de97fdcdae6efa7"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",
