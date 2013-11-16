@@ -1,3 +1,21 @@
+intervalId = null
+
+
+# heartbeat
+Deps.autorun ->
+  roomId = Session.get "roomId"
+  if roomId
+    unless intervalId
+      App.call "updateActivity" if App?
+      intervalId = Meteor.setInterval ->
+        App.call "updateActivity" if App?
+      , 5000
+  else
+    if intervalId
+      Meteor.clearInterval intervalId
+      intervalId = null
+
+
 Template.room.room = ->
   currentRoom = Room.findOne Session.get "roomId"
   Session.set "currentRoom", currentRoom
@@ -18,5 +36,5 @@ Template.room.players = ->
     displayName = user.emails[0].address if user.emails?.length > 0 and user.emails[0].address?
     if user._id == Meteor.userId()
       displayName += " (me)"
-    {_id: user._id, displayName: displayName}
+    {_id: user._id, displayName: displayName, lastActivity: user.lastActivity}
 

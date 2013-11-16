@@ -1,3 +1,7 @@
+publicUserFields =
+  "emails.address": 1
+  "profile.name": 1
+  lastActivity: 1
 
 Meteor.publish "room", (roomId) ->
   Room.findOne roomId
@@ -11,30 +15,16 @@ Meteor.publish "rooms", () ->
   where =
     started: false
     $or: q
-  Room.find where,
-    {
-      sort:
-        createdDate: -1
-      limit: 10
-    }
-
-Meteor.publish "friends", () ->
-  if !@userId
-    throw new Meteor.Error 403, "Must be logged in to retrieve friends"
-  Players.find
-    friends: @userId
-    {
-      sort:
-        lastUpdated: -1
-      limit: 10
-    }
+  opt =
+    limit: 10
+    sort:
+      createdDate: -1
+  Room.find where, opt
 
 Meteor.publish "allUsers", () ->
-  x = 1
-  Meteor.users.find {},
-    {
-      sort:
-        createdAt: -1
-      limit: 10
-    }
-
+  opt =
+    fields: publicUserFields
+    limit: 10
+    sort:
+      createdAt: -1
+  Meteor.users.find {}, opt

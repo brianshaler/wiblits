@@ -57,7 +57,6 @@ class @App
 
 app = @app = new @App()
 
-
 Template.page.showRoom = -> Session.get "showRoom"
 
 

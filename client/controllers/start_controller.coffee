@@ -16,7 +16,7 @@ Template.start.allUsers = ->
     {_id: user._id, displayName: displayName}
 
 Template.start.openRooms = ->
-  rooms = Room.find({started: false}, {sort: {createdAt: -1}}).fetch()
+  rooms = Room.find({inProgress: false}, {sort: {createdAt: -1}}).fetch()
   ownerIds = _.map rooms, (room) -> room.owner
   roomsByOwner = {}
   _.each rooms, (room) -> roomsByOwner[room.owner] = room._id unless roomsByOwner[room.owner]?
@@ -38,6 +38,6 @@ Template.start.events
       #Session.set "showRoom", true
       Meteor.Router.to "/room/#{roomId}"
   "click .join-room": (e) ->
-    roomId = @._id
+    roomId = @.roomId
     Meteor.call "joinRoom", roomId, (err, data) ->
       Meteor.Router.to "/room/#{roomId}"
