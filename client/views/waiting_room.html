@@ -5,12 +5,12 @@
     {{else}}
       <button class="make-public">Make public</button>
     {{/if}}
-    <button class="start-playing">Start playing</button>
   {{/if}}
   <h3>Players</h3>
   <ul>
     {{#each players}}
-      <li>{{displayName}}</li>
+      <li>{{displayName}} [{{lastActivity}}]</li>
     {{/each}}
   </ul>
+  <button class="join-room">Join room</button>
 </template>

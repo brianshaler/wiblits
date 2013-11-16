@@ -20,3 +20,7 @@ Template.waiting_room.events
     console.log "make-private"
     App.call "makePublic", false, (err, data) ->
       throw err if err
+  "click .join-room": (e) ->
+    roomId = Session.get "roomId"
+    Meteor.call "joinRoom", roomId, (err, data) ->
+      Meteor.Router.to "/room/#{roomId}"

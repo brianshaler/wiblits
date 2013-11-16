@@ -1,3 +1,14 @@
+ACTIVITY_TIMEOUT = 20 # seconds
+
+###
+Accounts.onCreateUser (options, user) ->
+  user.friends = []
+  user.lastActivity = new Date()
+  # We still want the default hook's 'profile' behavior.
+  user.profile = options.profile if options.profile
+  user
+###
+
 Meteor.methods
   createRoom: ->
     room = _.clone RoomSchema
@@ -7,8 +18,6 @@ Meteor.methods
   
   makePublic: (roomId, makePublic) ->
     check makePublic, Boolean
-    
-    console.log "makePublic " + (if makePublic then "true" else "false")
     
     room = Room.findOne roomId
     if !room
@@ -30,7 +39,49 @@ Meteor.methods
       throw new Meteor.Error 404, "Room not found"
     
     room.players.push @userId
+    room.inRoom.push @userId
+    
+    room.inRoom = _.uniq room.inRoom
     
     Room.update _id: roomId,
       $set:
         players: room.players
+  
+  checkRoomStatus: (roomId) ->
+    return unless @userId
+    check roomId, String
+    
+    
+  
+  prune: (roomId) ->
+    return unless @userId
+    check roomId, String
+    
+    room = Room.findOne roomId
+    if !room
+      throw new Meteor.Error 404, "Room not found"
+    
+    users = Meteor.users.find({_id: {$in: room.players}}).fetch()
+    activeUsers = []
+    _.each users, (user) ->
+      if user.lastActivity.getTime() > Date.now()-ACTIVITY_TIMEOUT*1000
+        activeUsers.push user._id
+    
+    if activeUsers.length < room.players.length
+      Room.update _id: roomId,
+        $set:
+          players: activeUsers
+    Meteor.call "checkRoomStatus", roomId
+  
+  updateActivity: (roomId) ->
+    return unless @userId
+    check roomId, String
+    
+    room = Room.findOne roomId
+    if !room
+      throw new Meteor.Error 404, "Room not found"
+    
+    Meteor.users.update _id: @userId,
+      $set:
+        lastActivity: new Date()
+    Meteor.call "prune", roomId

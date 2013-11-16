@@ -9,6 +9,9 @@
   owner: ""
   public: false
   started: false
+  inProgress: false
+  game: false
   invites: []
   players: []
+  inRoom: []
   createdAt: new Date()
