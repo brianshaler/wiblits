@@ -13,4 +13,6 @@ underscore
 accounts-base
 accounts-twitter
 accounts-ui
-twit
+moment
+twilio-meteor
+accounts-password

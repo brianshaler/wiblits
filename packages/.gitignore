@@ -2,3 +2,6 @@ router
 page-js-ie-support
 HTML5-History-API
 twit
+twitter-api
+moment
+twilio-meteor

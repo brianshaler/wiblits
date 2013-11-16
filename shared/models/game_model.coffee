@@ -1,6 +1,13 @@
-@Games = new Meteor.Collection "games"
+@Game = new Meteor.Collection "game"
 
-@Games.allow
+@Game.allow
   insert: () -> false
   update: () -> false
   remove: () -> false
+
+@GameSchema =
+  owner: ""
+  invites: []
+  players: []
+  started: false
+  createdAt: new Date()

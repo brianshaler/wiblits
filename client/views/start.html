@@ -1,3 +1,20 @@
 <template name="start">
-  start template
+  <div>
+    <button class="start-game">Start game</button>
+  </div>
+  <div>
+    <h3>All Users</h3>
+    <ul class="users-list">
+      {{#each allUsers}}
+        <li class="users-list-item">{{displayName}}</li>
+      {{/each}}
+    </ul>
+    
+    <h3>Open Games</h3>
+    <ul class="users-list">
+      {{#each openGames}}
+        <li class="users-list-item">{{displayName}} ({{gameId}}) <button class="join-game">join</button></li>
+      {{/each}}
+    </ul>
+  </div>
 </template>

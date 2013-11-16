@@ -1,3 +1,17 @@
 <template name="game">
-  game template
+  <h2>game template</h2>
+  <h4>{{game._id}}</h4>
+  {{#if game.started}}
+    game started!
+  {{else}}
+    {{#if isOwner}}
+      <button class="start-game">Start game</button>
+    {{/if}}
+    <h3>Players</h3>
+    <ul>
+      {{#each players}}
+        <li>{{displayName}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
 </template>

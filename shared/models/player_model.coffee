@@ -1,11 +1,11 @@
-@Friends = new Meteor.Collection "friends"
+@Player = new Meteor.Collection "player"
 
-@Friends.allow
+@Player.allow
   insert: () -> false
   update: () -> false
   remove: () -> false
 
-@FriendsSchema =
+@PlayerSchema =
   userId: ""
   friends: []
   lastUpdated: new Date()

@@ -3,7 +3,10 @@
   "dependencies": {
     "basePackages": {
       "router": {},
-      "twit": {}
+      "twit": {},
+      "twitter-api": {},
+      "moment": {},
+      "twilio-meteor": {}
     },
     "packages": {
       "router": {
@@ -15,6 +18,21 @@
         "git": "https://github.com/subhog/meteor-twit.git",
         "tag": "v0.2.0",
         "commit": "3eb473f9efef8c77ae6a8eb6715fbdf93c4d87c0"
+      },
+      "twitter-api": {
+        "git": "https://github.com/Sewdn/meteor-twitter-api.git",
+        "tag": "v0.1.0",
+        "commit": "c7a0dbfe61f6207d40cc1863c45b179aadadbb6a"
+      },
+      "moment": {
+        "git": "https://github.com/acreeger/meteor-moment.git",
+        "tag": "v2.2.1",
+        "commit": "9ee12e714afe56b189f53076447b7b54f3012065"
+      },
+      "twilio-meteor": {
+        "git": "http://github.com/andreioprisan/twilio-meteor.git",
+        "tag": "v1.1.0",
+        "commit": "7f36ec52fc334caf8b740320524df62afce890e1"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

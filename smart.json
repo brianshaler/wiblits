@@ -1,6 +1,9 @@
 {
   "packages": {
     "router": {},
-    "twit": {}
+    "twit": {},
+    "twitter-api": {},
+    "moment": {},
+    "twilio-meteor": {}
   }
 }

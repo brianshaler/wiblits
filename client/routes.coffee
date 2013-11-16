@@ -17,7 +17,7 @@
     "/game/:id":
       as: "gamePage"
       to: (id) ->
-        app.game.loadGame id
+        App.loadGame id
         "page"
     "/": ->
       Session.set "gameId", null
