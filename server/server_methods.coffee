@@ -1,11 +1,11 @@
 Meteor.methods
-  startGame: (gameId) ->
-    check gameId, String
-    game = Game.findOne gameId
-    if !game
-      throw new Meteor.Error 404, "Game not found"
-    game.started = true
-    Game.update _id: gameId,
+  startPlaying: (roomId) ->
+    check roomId, String
+    room = Room.findOne roomId
+    if !room
+      throw new Meteor.Error 404, "Room not found"
+    room.started = true
+    Room.update _id: roomId,
       $set:
-        started: game.started
+        started: room.started
   

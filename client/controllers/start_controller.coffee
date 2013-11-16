@@ -15,11 +15,11 @@ Template.start.allUsers = ->
       displayName += " (me)"
     {_id: user._id, displayName: displayName}
 
-Template.start.openGames = ->
-  games = Game.find({started: false}, {sort: {createdAt: -1}}).fetch()
-  ownerIds = _.map games, (game) -> game.owner
-  gamesByOwner = {}
-  _.each games, (game) -> gamesByOwner[game.owner] = game._id unless gamesByOwner[game.owner]?
+Template.start.openRooms = ->
+  rooms = Room.find({started: false}, {sort: {createdAt: -1}}).fetch()
+  ownerIds = _.map rooms, (room) -> room.owner
+  roomsByOwner = {}
+  _.each rooms, (room) -> roomsByOwner[room.owner] = room._id unless roomsByOwner[room.owner]?
   
   list = Meteor.users.find({_id: {"$in": ownerIds}}).fetch()
   _.map list, (user) ->
@@ -28,16 +28,16 @@ Template.start.openGames = ->
     displayName = user.emails[0].address if user.emails?.length > 0 and user.emails[0].address?
     if user._id == Meteor.userId()
       displayName += " (me)"
-    {_id: user._id, displayName: displayName, gameId: gamesByOwner[user._id]}
+    {_id: user._id, displayName: displayName, roomId: roomsByOwner[user._id]}
 
 Template.start.events
-  "click .start-game": (e) ->
-    Meteor.call "createGame", (err, gameId) ->
+  "click .create-room": (e) ->
+    Meteor.call "createRoom", (err, roomId) ->
       throw err if err
-      Session.set "gameId", gameId
-      #Session.set "showGame", true
-      Meteor.Router.to "/game/#{gameId}"
-  "click .join-game": (e) ->
-    gameId = @._id
-    Meteor.call "joinGame", gameId, (err, data) ->
-      Meteor.Router.to "/game/#{gameId}"
+      Session.set "roomId", roomId
+      #Session.set "showRoom", true
+      Meteor.Router.to "/room/#{roomId}"
+  "click .join-room": (e) ->
+    roomId = @._id
+    Meteor.call "joinRoom", roomId, (err, data) ->
+      Meteor.Router.to "/room/#{roomId}"

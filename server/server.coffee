@@ -1,15 +1,17 @@
 
-Meteor.publish "game", (gameId) ->
-  Game.findOne gameId
+Meteor.publish "room", (roomId) ->
+  Room.findOne roomId
 
-Meteor.publish "games", () ->
-  q = [{started: false}]
-  if this.userId
-    check this.userId, String
-    q.push players: this.userId
-    q.push owner: this.userId
-  Game.find
+Meteor.publish "rooms", () ->
+  q = [{public: true}]
+  if @userId
+    check @userId, String
+    q.push players: @userId
+    q.push owner: @userId
+  where =
+    started: false
     $or: q
+  Room.find where,
     {
       sort:
         createdDate: -1

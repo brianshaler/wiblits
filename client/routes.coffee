@@ -14,13 +14,13 @@
     "stuff to do before routing.."
   
   Meteor.Router.add
-    "/game/:id":
-      as: "gamePage"
+    "/room/:id":
+      as: "roomPage"
       to: (id) ->
-        App.loadGame id
+        App.loadRoom id
         "page"
     "/": ->
-      Session.set "gameId", null
-      Session.set "showGame", false
+      Session.set "roomId", null
+      Session.set "showRoom", false
       "page"
     "*": "not_found"

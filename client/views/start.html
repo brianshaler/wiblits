@@ -1,6 +1,6 @@
 <template name="start">
   <div>
-    <button class="start-game">Start game</button>
+    <button class="create-room">Start playing</button>
   </div>
   <div>
     <h3>All Users</h3>
@@ -10,10 +10,10 @@
       {{/each}}
     </ul>
     
-    <h3>Open Games</h3>
+    <h3>Open rooms</h3>
     <ul class="users-list">
-      {{#each openGames}}
-        <li class="users-list-item">{{displayName}} ({{gameId}}) <button class="join-game">join</button></li>
+      {{#each openRooms}}
+        <li class="users-list-item">{{displayName}} ({{roomId}}) <button class="join-room">join</button></li>
       {{/each}}
     </ul>
   </div>

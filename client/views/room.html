@@ -1,0 +1,9 @@
+<template name="room">
+  <h2>room template</h2>
+  <h4>{{room._id}}</h4>
+  {{#if room.started}}
+    room started!
+  {{else}}
+    {{> waiting_room}}
+  {{/if}}
+</template>

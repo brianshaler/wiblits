@@ -1,18 +1,34 @@
 Meteor.methods
-  createGame: ->
-    game = _.clone GameSchema
-    game.owner = @userId
-    game.players = [@userId]
-    Game.insert game
-  joinGame: (gameId) ->
-    check gameId, String
+  createRoom: ->
+    room = _.clone RoomSchema
+    room.owner = @userId
+    room.players = [@userId]
+    Room.insert room
+  
+  privacy: (roomId, makePublic) ->
+    check makePublic, Boolean
     
-    game = Game.findOne gameId
-    if !game
-      throw new Meteor.Error 404, "Game not found"
+    room = Room.findOne roomId
+    if !room
+      throw new Meteor.Error 404, "Room not found"
+    if room.owner != @userId
+      throw new Meteor.Error 403, "You're not the owner"
     
-    game.players.push @userId
+    room.public = makePublic
     
-    Game.update _id: gameId,
+    Room.update _id: roomId,
       $set:
-        players: game.players
+        public: room.public
+  
+  joinRoom: (roomId) ->
+    check roomId, String
+    
+    room = Room.findOne roomId
+    if !room
+      throw new Meteor.Error 404, "Room not found"
+    
+    room.players.push @userId
+    
+    Room.update _id: roomId,
+      $set:
+        players: room.players
