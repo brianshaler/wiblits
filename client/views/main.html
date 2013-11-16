@@ -1,0 +1,40 @@
+<head>
+  <title>wiblits</title>
+  <meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+  {{> root}}
+</body>
+
+<template name="root">
+  <div class="container outer-container" id="outer-container">
+    <div class="page-container" id="page-container">
+      {{renderPage}}
+    </div>
+  </div>
+</template>
+
+<template name="page">
+  {{#if error}}
+    <div class="alert alert-error">{{error}}</div>
+  {{/if}}
+  
+  {{#if showGame}}
+    {{> game}}
+  {{else}}
+    {{#if currentUser}}
+      {{> start}}
+    {{else}}
+      {{> signup}}
+    {{/if}}
+  {{/if}}
+</template>
+
+<template name="loading">
+  <div>Loading...</div>
+</template>
+
+<template name="not_found">
+not found.
+</template>
