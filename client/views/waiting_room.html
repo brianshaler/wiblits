@@ -16,10 +16,10 @@
   
   {{#if gameFinished}}
   <div id='game_finished'>
-    <h3>Results</h3>
+    <h3><b>Results</b><b class='score'>Score</b></h3>
     <ul class="list-unstyled">
       {{#each resultsList}}
-      <li>{{displayName}} - {{value}}</li>
+      <li>{{displayName}} <span class='score'>{{value}}</span></li>
       {{/each}}
     </ul>
   </div>
