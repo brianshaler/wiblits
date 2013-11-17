@@ -9,6 +9,8 @@
   owner: ""
   public: false
   started: false
+  starting: false
+  startAt: null
   inProgress: false
   game: false
   invites: []

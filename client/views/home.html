@@ -5,6 +5,11 @@
       <br>
       <span>your friends</span>.
     </p>
-    <a class='start' href='#'>START</a>
+    {{#if currentUser}}
+      {{> start}}
+    {{else}}
+      <a class='start' href='#'>START</a>
+    {{/if}}
+    
   </div>
 </template>

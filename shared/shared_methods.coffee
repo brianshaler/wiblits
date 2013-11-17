@@ -1,5 +1,3 @@
-ACTIVITY_TIMEOUT = 20 # seconds
-
 ###
 Accounts.onCreateUser (options, user) ->
   user.friends = []
@@ -41,47 +39,17 @@ Meteor.methods
     room.players.push @userId
     room.inRoom.push @userId
     
+    room.players = _.uniq room.players
     room.inRoom = _.uniq room.inRoom
     
     Room.update _id: roomId,
       $set:
         players: room.players
+        inRoom: room.inRoom
   
-  checkRoomStatus: (roomId) ->
+  updateActivity: ->
     return unless @userId
-    check roomId, String
-    
-    
-  
-  prune: (roomId) ->
-    return unless @userId
-    check roomId, String
-    
-    room = Room.findOne roomId
-    if !room
-      throw new Meteor.Error 404, "Room not found"
-    
-    users = Meteor.users.find({_id: {$in: room.players}}).fetch()
-    activeUsers = []
-    _.each users, (user) ->
-      if user.lastActivity.getTime() > Date.now()-ACTIVITY_TIMEOUT*1000
-        activeUsers.push user._id
-    
-    if activeUsers.length < room.players.length
-      Room.update _id: roomId,
-        $set:
-          players: activeUsers
-    Meteor.call "checkRoomStatus", roomId
-  
-  updateActivity: (roomId) ->
-    return unless @userId
-    check roomId, String
-    
-    room = Room.findOne roomId
-    if !room
-      throw new Meteor.Error 404, "Room not found"
     
     Meteor.users.update _id: @userId,
       $set:
         lastActivity: new Date()
-    Meteor.call "prune", roomId
