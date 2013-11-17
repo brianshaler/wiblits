@@ -13,31 +13,18 @@
   results: {}
   createdAt: new Date()
 
-
-defaultGame =
-  isSelect: false
-  isCanvas: false
-  name: ""
-  description: "description"
-  duration: 60
-
+gameNames = ["HighNumber", "Roshambo", "Pop"]
 games = []
-addGame = (obj) ->
-  games.push _.extend _.clone(defaultGame), obj
+addGame = (name) ->
+  wg = new Wiblit[name]()
+  obj =
+    name: name
+    title: wg.title
+    description: wg.description
+    duration: wg.duration
+  games.push obj
 
-addGame
-  name: "HighNumber"
-  isSelect: true
-  duration: 10
-addGame
-  name: "Roshambo"
-  isSelect: true
-  duration: 10
-
-
-
-#addGame
-#  name: ""
-#  isSelect: true
+Meteor.startup ->
+  _.each gameNames, (name) -> addGame name
 
 @Games = games

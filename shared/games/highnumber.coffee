@@ -1,6 +1,9 @@
 class @Wiblit.HighNumber extends @Wiblit.Game
   constructor: (@el) ->
     super @el
+    @duration = 3
+    @title = "High Number"
+    @description = "Click the highest number"
   
   @compareTwoResults: (result1, result2) ->
     console.log "is #{result1.points} higher than #{result2.points}?"
