@@ -2,13 +2,8 @@ Template.signup.events "click #login_twitter": (e, tmpl) ->
   e.preventDefault()
 
   Meteor.loginWithTwitter {}, (err) ->
-    if err
-      # error handling
-      # Basically they cancled out of it, no real error to handle
-    else
+    unless err
       alert 'logged in...with twitter...'
-      # show an alert
-      # alert('logged in');
 
 Template.signup.events
   "submit #login_form": (e, t) ->
@@ -59,9 +54,17 @@ Template.register.events
     # Success. Account has been created and the user
     # has logged in successfully. 
     false
+  
   "click #go_to_login": (e) ->
     e.preventDefault()
     Meteor.Router.to "/login"
+
+  "click #register_twitter": (e, tmpl) ->
+    e.preventDefault()
+
+    Meteor.loginWithTwitter {}, (err) ->
+      unless err
+        alert 'logged in...with twitter...'
 
 Template.logout.events
   "click button": (e) ->
