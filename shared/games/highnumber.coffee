@@ -16,12 +16,18 @@ class @Wiblit.HighNumber extends @Wiblit.Game
       ten: 10
       fifty: 50
     
+    div = $('<div class="highnumber">')
+    div.append '<h2>Select the Highest Number</h2>'
+
     _.each buttons, (value, key) =>
       b = $("<button>")
-      b.addClass "game-select"
+      b.addClass "btn btn-default game-select"
       b.attr "data-value", value
       b.html key
-      @el.append b
+      div.append b
+      
+    @el.append div
+
     $(".game-select", @el).click (e) =>
       val = $(e.target).attr "data-value"
       @points = val
