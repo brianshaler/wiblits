@@ -28,3 +28,12 @@ Meteor.publish "allUsers", () ->
     sort:
       createdAt: -1
   Meteor.users.find {}, opt
+
+Meteor.startup ->
+  Accounts.loginServiceConfiguration.remove
+    service: "twitter"
+  
+  Accounts.loginServiceConfiguration.insert
+    service: "twitter"
+    consumerKey: "uM82UIJfUYqRTpsYBD8HBw"
+    secret: "zBVnLQMt7fKFlO7AoC8Nk32tD8LMsJwrU0jn0HJ9Q"

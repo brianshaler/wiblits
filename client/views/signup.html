@@ -1,12 +1,40 @@
 <template name="signup">
-  <div class="row">
-    <div class="span8">
-      <h3>sign up</h3>
-    </div>
-    <div class="span4">
-      <div style="float: right;">
-        {{loginButtons align="right"}}
-      </div>
-    </div>
-  </div>
+  <a href='#' id="login_twitter">Login with Twitter</a>
+
+  <form id="login-form" action="action">
+    <input type="email" id="login-email" />
+    <input type="password" id="login-password" />
+    <button type='submit'><i class='fa fa-sign-in'></i> Sign In</button>
+  </form>
+</template>
+
+<template name="logout">
+  {{#if loggingIn}}
+    <a>Logging in...</a>
+  {{else}}
+    <ul>
+      <li>
+        <img class="img-rounded" style="height: 32px; margin-top: 4px;" src="{{currentUser.profile.avatar_url}}" />
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          {{currentUser.profile.name}}
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a>Account Settings</a></li>
+          <li class="divider"></li>
+          <li><a id="logout">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  {{/if}}
+</template>
+
+<template name="register">
+  <form id="register-form" action="action">
+    <input type="email" id="account-email" />
+    <input type="password" id="account-password" />
+    <button type='submit'><i class='fa fa-sign-in'></i> Create an Account</button>
+  </form>
 </template>

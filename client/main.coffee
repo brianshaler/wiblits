@@ -61,5 +61,6 @@ Template.page.showRoom = -> Session.get "showRoom"
 
 
 Deps.autorun =>
-  $('body').removeClass()
-  $("body").addClass("home")  if Session.get "showRoom"
+  body = $('body')
+  body.removeClass("game")
+  body.addClass("game")  if Session.get "showRoom"

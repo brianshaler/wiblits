@@ -19,6 +19,8 @@
       to: (id) ->
         App.loadRoom id
         "page"
+    "/login": "signup"
+    "/register": "register"
     "/": ->
       Session.set "roomId", null
       Session.set "showRoom", false
