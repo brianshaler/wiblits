@@ -1,21 +1,22 @@
-Meteor.subscribe "rooms"
-Meteor.subscribe "allUsers"
-
 @initRoutes()
 
 gameStarted = false
 COUNTDOWN = 6
 
+Meteor.autorun =>
+  if !Session.get "showGame"
+    Meteor.subscribe "rooms"
+    Meteor.subscribe "allUsers"
+  if Session.get "roomId"
+    Meteor.subscribe "room", Session.get "roomId"
+  if Session.get "gameId"
+    Meteor.subscribe "game", Session.get "gameId"
+
 class @App
   constructor: ->
     Meteor.startup =>
-      #root.viewport = new Viewporter "outer-container", fullHeightPortrait: false
-      Meteor.autosubscribe =>
-        if Session.get "gameId"
-          Meteor.subscribe "game", Session.get "gameId"
-      
-      # hack
       Deps.autorun =>
+        # hack
         lastUpdate = Session.set "lastUpdate", Date.now()
         
         roomId = Session.get "roomId"

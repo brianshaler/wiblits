@@ -11,6 +11,7 @@ Meteor.startup ->
       game.players = room.players
       gameId = Game.insert game
       
+      console.log "Okay, #{room._id} is actually starting now"
       Room.update _id: room._id,
         $set:
           inProgress: true
@@ -31,7 +32,7 @@ Meteor.startup ->
               players: activeUsers
       
       if !room.starting and room.players.length > 1
-        console.log "Start game! #{room._id}"
+        console.log "Start game! #{room._id} (in 6 seconds)"
         Room.update _id: room._id,
           $set:
             starting: true

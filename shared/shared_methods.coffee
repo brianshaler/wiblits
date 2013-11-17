@@ -80,7 +80,7 @@ Meteor.methods
       $set:
         results: game.results
         inProgress: game.inProgress
-        finished: finished
+        finished: game.finished
   
   updateActivity: ->
     return unless @userId

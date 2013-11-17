@@ -19,6 +19,7 @@ defaultGame =
   isCanvas: false
   name: ""
   description: "description"
+  duration: 60
 
 games = []
 addGame = (obj) ->
@@ -27,6 +28,10 @@ addGame = (obj) ->
 addGame
   name: "Roshambo"
   isSelect: true
+  duration: 10
+
+
+
 #addGame
 #  name: ""
 #  isSelect: true

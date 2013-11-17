@@ -8,7 +8,7 @@ class @Wiblit.Game
     @selection = ""
   
   start: ->
-    
+    Session.set "finishedPlaying", false
   
   quit: ->
     #nothing?
@@ -23,6 +23,7 @@ class @Wiblit.Game
       throw err if err
   
   finish: ->
+    Session.set "finishedPlaying", true
     status =
       points: @points
       progress: @progress

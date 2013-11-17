@@ -4,7 +4,8 @@ publicUserFields =
   lastActivity: 1
 
 Meteor.publish "room", (roomId) ->
-  Room.findOne roomId
+  check roomId, String
+  Room.find _id: roomId
 
 Meteor.publish "rooms", () ->
   q = [{public: true}]
@@ -30,8 +31,8 @@ Meteor.publish "allUsers", () ->
   Meteor.users.find {}, opt
 
 Meteor.publish "game", (gameId) ->
-  console.log "Publishing #{gameId}"
-  Game.findOne gameId
+  check gameId, String
+  Game.find _id: gameId
 
 
 Meteor.startup ->

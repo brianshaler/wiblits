@@ -1,3 +1,16 @@
 <template name="game">
-  {{#constant}}<div class="game-container"></div>{{/constant}}
+  {{#unless playerFinished}}
+    {{#constant}}<div class="game-container"></div>{{/constant}}
+  {{else}}
+    {{#if gameFinished}}
+      <h3>Done!</h3>
+      <p>Waiting for other players</p>
+    {{else}}
+      <ul>
+        {{#each resultsList}}
+        <li>{{displayName}} - {{value}}</li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  {{/unless}}
 </template>
