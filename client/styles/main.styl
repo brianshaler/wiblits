@@ -13,18 +13,24 @@ header
   text-align: center
   border-bottom: 5px solid #498bcc
   padding: 35px 0
+  transition: border-bottom-width .5s, height .5s, padding .5s
   h1
     display: inline-block
     padding-left: 20px
     margin: 30px 0 0 0
     vertical-align: top
     color: #222
+    transition: padding .5s, margin .5s, font-size .5s
   .logo
-    span
+    text-decoration: none
+    &:hover
+      text-decoration: none
+    span.logo
       width: 20*5px
       height: 20*4px
       position: relative
       display: inline-block
+      transition: height .5s, width .5s
     .cube
       width: 20%
       height: 25%
@@ -66,7 +72,16 @@ header
       top: 0
       left: 80%
   
-
+.game header
+  padding: 5px 10px
+  border-bottom-width: 2px
+  h1
+    font-size: 14px
+    margin-top: 7px
+    padding-left: 7px
+  span.logo
+    width: 7*5px
+    height: 7*4px
 .landing
   text-align: center
   p
@@ -134,5 +149,11 @@ header
 
 .game-room-list
   text-align: left
+  margin: 60px 10% 0 10%
+  h4
+    border-bottom: 1px solid #498bcc
+    color: #fff
   ul
     list-style: none
+    margin: 0
+    padding: 0

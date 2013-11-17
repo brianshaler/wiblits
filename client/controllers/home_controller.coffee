@@ -9,7 +9,7 @@ Template.home.events
       throw err if err
       Session.set "roomId", roomId
       #Session.set "showRoom", true
-      Meteor.Router.to "/room/join/#{roomId}"
+      Meteor.Router.to "/room/#{roomId}"
   "click .join-room": (e) ->
     e.preventDefault()
     roomId = @.roomId
