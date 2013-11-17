@@ -18,10 +18,9 @@ class @Wiblit.Roshambo extends @Wiblit.Game
   start: ->
     super()
     buttons = ["rock", "paper", "scissors"]
-    
+    @el.append '<h2>Roshambo</h2>'
     _.each buttons, (button) =>
-      b = $("<button>")
-      b.addClass "game-select"
+      b = $("<button class='game-select btn btn-default'>")
       b.attr "data-value", button
       b.html button
       @el.append b
