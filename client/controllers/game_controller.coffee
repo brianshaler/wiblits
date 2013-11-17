@@ -23,8 +23,6 @@ Template.game.resultsList = ->
   results = []
   if game
     results = _.map game.results, (result, _id) ->
-      console.log "User by id #{_id}"
-      console.log Meteor.users.findOne(_id)
       user = Meteor.users.findOne _id
       user.displayName = UserHelper.getUserName user
       {user: user, value: result.selection}
