@@ -17,6 +17,9 @@ Meteor.startup ->
 Template.room.room = ->
   Session.get "currentRoom"
 
+Template.room_joined.room = ->
+  Session.get "currentRoom"
+
 Template.room.showCountdown = ->
   Session.get("timeLeft") > 0
 
@@ -37,3 +40,19 @@ Template.room.players = ->
       displayName += " (me)"
     {_id: user._id, displayName: displayName, lastActivity: user.lastActivity}
 
+
+Template.room.events
+  "click .make-public": (e) ->
+    App.call "makePublic", true, (err, data) ->
+      throw err if err
+  "click .make-private": (e) ->
+    App.call "makePublic", false, (err, data) ->
+      throw err if err
+  "click .join-room": (e) ->
+    roomId = Session.get "roomId"
+    
+    if Meteor.user()?
+      Meteor.call "joinRoom", roomId, (err, data) ->
+        Meteor.Router.to "/room/join/#{roomId}"
+    else
+      Meteor.Router.to "/login"

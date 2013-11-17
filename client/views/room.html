@@ -1,13 +1,20 @@
 <template name="room">
-  <h2>room template</h2>
-  <h4>{{room._id}}</h4>
-  {{#if room.starting}}
-    {{#if showCountdown}}
-      {{> starting}}
+  <h2>Game Room</h2>
+  
+  {{#if isOwner}}
+    {{#if room.public}}
+      <button class="make-private">Make private</button>
     {{else}}
-      {{> game}}
+      <button class="make-public">Make public</button>
     {{/if}}
-  {{else}}
-    {{> waiting_room}}
   {{/if}}
+  
+  <h3>Players</h3>
+  <ul>
+    {{#each players}}
+      <li>{{displayName}}</li>
+    {{/each}}
+  </ul>
+
+  <button class="join-room">Join Game</button>
 </template>

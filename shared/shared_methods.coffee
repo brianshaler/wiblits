@@ -4,6 +4,7 @@ Meteor.methods
     room = _.clone RoomSchema
     room.owner = @userId
     room.players = [@userId]
+    room.public = true
     Room.insert room
   
   makePublic: (roomId, makePublic) ->

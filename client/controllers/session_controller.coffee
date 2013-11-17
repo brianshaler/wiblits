@@ -18,9 +18,13 @@ Template.signup.events
     
     # If validation passes, supply the appropriate fields to the
     Meteor.loginWithPassword email, password, (err) ->
-      # Need to handle error, but fuckit...
+      # Need to handle error, but fukit...
       unless err
-        Meteor.Router.to "/"
+        roomId = Session.get "roomId"
+        if roomId?
+          Meteor.Router.to "/room/#{roomId}"
+        else
+          Meteor.Router.to "/"
     
     # The user has been logged in.
     false
@@ -43,9 +47,13 @@ Template.register.events
       email: email
       password: password
     , (err) ->
-      # Need to handle error, but fuckit...
+      # Need to handle error, but fukit...
       unless err
-        Meteor.Router.to "/"
+        roomId = Session.get "roomId"
+        if roomId?
+          Meteor.Router.to "/room/#{roomId}"
+        else
+          Meteor.Router.to "/"
 
     # Success. Account has been created and the user
     # has logged in successfully. 
