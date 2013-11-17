@@ -4,11 +4,11 @@ Template.signup.events "click #login_twitter": (e, tmpl) ->
   Meteor.loginWithTwitter {}, (err) ->
     unless err
       roomId = Session.get "roomId"
-        if roomId?
-          Meteor.call "joinRoom", roomId, (err, data) ->
-            Meteor.Router.to "/room/#{roomId}"
-        else
-          Meteor.Router.to "/"
+      if roomId?
+        Meteor.call "joinRoom", roomId, (err, data) ->
+          Meteor.Router.to "/room/#{roomId}"
+      else
+        Meteor.Router.to "/"
 
 Template.signup.events
   "submit #login_form": (e, t) ->
