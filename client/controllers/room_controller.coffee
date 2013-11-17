@@ -17,9 +17,6 @@ Meteor.startup ->
 Template.room.room = ->
   Session.get "currentRoom"
 
-Template.room_joined.room = ->
-  Session.get "currentRoom"
-
 Template.room.showCountdown = ->
   Session.get("timeLeft") > 0
 
@@ -33,13 +30,14 @@ Template.room.players = ->
   return [] unless currentRoom
   list = Meteor.users.find({_id: {"$in": currentRoom.players}}).fetch()
   _.map list, (user) ->
-    displayName = "Anonymous"
-    displayName = user.profile.name if user.profile?.name?
-    displayName = user.emails[0].address if user.emails?.length > 0 and user.emails[0].address?
+    displayName = UserHelper.getUserName user
+    
     if user._id == Meteor.userId()
       displayName += " (me)"
     {_id: user._id, displayName: displayName, lastActivity: user.lastActivity}
 
+Template.room.startingAndJoined = ->
+  return false
 
 Template.room.events
   "click .make-public": (e) ->
@@ -53,6 +51,6 @@ Template.room.events
     
     if Meteor.user()?
       Meteor.call "joinRoom", roomId, (err, data) ->
-        Meteor.Router.to "/room/join/#{roomId}"
+        Meteor.Router.to "/room/#{roomId}"
     else
       Meteor.Router.to "/login"

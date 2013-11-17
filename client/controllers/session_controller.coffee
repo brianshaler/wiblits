@@ -12,8 +12,6 @@ Template.signup.events
     # retrieve the input field values
     email = $("#login_email").val()
     password = $("#login_password").val()
-    console.log email, password
-    
     # Trim and validate your fields here.... 
     
     # If validation passes, supply the appropriate fields to the
@@ -40,7 +38,6 @@ Template.register.events
     # retrieve the input field values
     email = $("#account_email").val()
     password = $("#account_password").val()
-    console.log email, password
     
     # Trim and validate the input
     Accounts.createUser
