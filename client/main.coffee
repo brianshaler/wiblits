@@ -36,6 +36,10 @@ class @App
       room = Room.findOne id
       if room
         #console.log "Showing room."
+        Session.set "startedCountdown", null
+        Session.set "timeLeft", null
+        Session.set "isPlayer", false
+        Session.set "roomState", "waiting"
         Session.set "roomId", id
         Session.set "showRoom", true
         Session.set "createError", null
