@@ -29,6 +29,11 @@ Meteor.publish "allUsers", () ->
       createdAt: -1
   Meteor.users.find {}, opt
 
+Meteor.publish "game", (gameId) ->
+  console.log "Publishing #{gameId}"
+  Game.findOne gameId
+
+
 Meteor.startup ->
   Accounts.loginServiceConfiguration.remove
     service: "twitter"

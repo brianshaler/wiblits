@@ -10,6 +10,9 @@ class @App
   constructor: ->
     Meteor.startup =>
       #root.viewport = new Viewporter "outer-container", fullHeightPortrait: false
+      Meteor.autosubscribe =>
+        if Session.get "gameId"
+          Meteor.subscribe "game", Session.get "gameId"
       
       # hack
       Deps.autorun =>

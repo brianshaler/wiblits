@@ -6,6 +6,7 @@ Meteor.startup ->
     rooms = Room.find({inProgress: false, startAt: {$lt: new Date()}}).fetch()
     _.each rooms, (room) ->
       game = _.clone GameSchema
+      _.extend game, Games[0]
       game.roomId = room._id
       game.players = room.players
       gameId = Game.insert game

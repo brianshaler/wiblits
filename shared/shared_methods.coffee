@@ -1,11 +1,3 @@
-###
-Accounts.onCreateUser (options, user) ->
-  user.friends = []
-  user.lastActivity = new Date()
-  # We still want the default hook's 'profile' behavior.
-  user.profile = options.profile if options.profile
-  user
-###
 
 Meteor.methods
   createRoom: ->
@@ -46,6 +38,49 @@ Meteor.methods
       $set:
         players: room.players
         inRoom: room.inRoom
+  
+  gameProgress: (roomId, progress) ->
+    check roomId, String
+    
+    room = Room.findOne roomId
+    if !room
+      throw new Meteor.Error 404, "Room not found"
+    if !room.game
+      throw new Meteor.Error 404, "Game not found"
+    game = Game.findOne room.game
+    
+    # this is a race condition waiting to happen...
+    game.results[@userId] = progress
+    Game.update _id: game._id,
+      $set:
+        results: game.results
+  
+  gameFinish: (roomId, progress) ->
+    check roomId, String
+    
+    room = Room.findOne roomId
+    if !room
+      throw new Meteor.Error 404, "Room not found"
+    if !room.game
+      throw new Meteor.Error 404, "Game not found"
+    game = Game.findOne room.game
+    
+    # this is a race condition waiting to happen...
+    game.results[@userId] = progress
+    game.results[@userId].finished = true
+    
+    unfinished = _.find game.players, (player) ->
+      !game.results[player]? or game.results[player].finished != true
+    
+    unless unfinished
+      game.inProgress = false
+      game.finished = true
+    
+    Game.update _id: game._id,
+      $set:
+        results: game.results
+        inProgress: game.inProgress
+        finished: finished
   
   updateActivity: ->
     return unless @userId
