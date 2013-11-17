@@ -6,6 +6,7 @@ class @Wiblit.Game
     @progress = 0
     @lives = 0
     @selection = ""
+    @started = false
   
   @sortResults: (results) ->
     results.sort @compareTwoResults

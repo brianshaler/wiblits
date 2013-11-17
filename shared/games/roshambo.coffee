@@ -17,14 +17,16 @@ class @Wiblit.Roshambo extends @Wiblit.Game
   
   start: ->
     super()
-    buttons = ["rock", "paper", "scissors"]
-    @el.append '<h2>Roshambo</h2>'
-    _.each buttons, (button) =>
-      b = $("<button class='game-select btn btn-default'>")
-      b.attr "data-value", button
-      b.html button
-      @el.append b
-    $(".game-select", @el).click (e) =>
-      val = $(e.target).attr "data-value"
-      @selection = val
-      @finish()
+    if !@started
+      @started = true
+      buttons = ["rock", "paper", "scissors"]
+      @el.append '<h2>Roshambo</h2>'
+      _.each buttons, (button) =>
+        b = $("<button class='game-select btn btn-default'>")
+        b.attr "data-value", button
+        b.html button
+        @el.append b
+      $(".game-select", @el).click (e) =>
+        val = $(e.target).attr "data-value"
+        @selection = val
+        @finish()
