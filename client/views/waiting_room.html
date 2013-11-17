@@ -1,18 +1,27 @@
 <template name="waiting_room">
   {{#if isOwner}}
-    {{#if room.public}}
-      <button class="make-private">Make private</button>
-    {{else}}
-      <button class="make-public">Make public</button>
-    {{/if}}
+    <h2>
+      Your Game Room
+      {{#if isOwner}}
+        {{#if room.public}}
+          <a class="btn btn-default btn-xs make-private">Make private</a>
+        {{else}}
+          <a class="btn btn-default btn-xs make-public">Make public</a>
+        {{/if}}
+      {{/if}}
+    </h2>
+  {{else}}
+    <h2>Game Room</h2>
   {{/if}}
-  
-  <h3>Players</h3>
-  <ul>
-    {{#each players}}
-      <li>{{displayName}}</li>
-    {{/each}}
-  </ul>
 
   <button class="join-room">Join Game</button>
+
+  <div class='players'>
+    <h3>Players</h3>
+    <ul class="list-unstyled">
+      {{#each players}}
+        <li>{{displayName}}</li>
+      {{/each}}
+    </ul>
+  </div>
 </template>
