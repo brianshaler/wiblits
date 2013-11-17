@@ -15,7 +15,6 @@ Template.waiting_room.hasJoined = ->
   _.map list, (user) ->
     if user._id is Meteor.userId()
       hasJoined = true
-  console.log hasJoined
   hasJoined
 
 Template.waiting_room.events

@@ -45,24 +45,26 @@ startScheduledGames = ->
     game.players = room.players
     gameId = Game.insert game
     
-    console.log "Okay, #{room._id} is actually starting now"
+    duration = 60
+    duration = game.duration if game.duration
+    duration += 10
+    
     Room.update _id: room._id,
       $set:
         inProgress: true
         game: gameId
+        finishAt: new Date Date.now()+duration*1000
+        finished: false
 
 endFinishedGames = ->
   # Create a game and start it if scheduled to start
-  rooms = Room.find({inProgress: false, startAt: {$lt: new Date()}}).fetch()
+  rooms = Room.find({finished: false, finishAt: {$lt: new Date()}}).fetch()
   _.each rooms, (room) ->
-    game = _.clone GameSchema
-    _.extend game, Games[0]
-    game.roomId = room._id
-    game.players = room.players
-    gameId = Game.insert game
+    game = Game.findOne room.game
     
+    room.results = Wiblit[game.name].sortResults(game.results)
     console.log "Okay, #{room._id} is actually starting now"
     Room.update _id: room._id,
       $set:
-        inProgress: true
-        game: gameId
+        inProgress: false
+        finished: true

@@ -26,6 +26,10 @@ addGame = (obj) ->
   games.push _.extend _.clone(defaultGame), obj
 
 addGame
+  name: "HighNumber"
+  isSelect: true
+  duration: 10
+addGame
   name: "Roshambo"
   isSelect: true
   duration: 10

@@ -3,7 +3,7 @@ class @Wiblit.HighNumber extends @Wiblit.Game
     super @el
   
   @compareTwoResults: (result1, result2) ->
-    console.log "does #{result1.points} higher than #{result2.points}?"
+    console.log "is #{result1.points} higher than #{result2.points}?"
     return -1 if result1.points > result2.points
     return 1
   
@@ -23,4 +23,5 @@ class @Wiblit.HighNumber extends @Wiblit.Game
     $(".game-select", @el).click (e) =>
       val = $(e.target).attr "data-value"
       @points = val
+      @selection = $(e.target).html()
       @finish()

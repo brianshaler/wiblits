@@ -1,8 +1,10 @@
 <template name="game">
   {{#unless playerFinished}}
+    Game Container...
     {{#constant}}<div class="game-container"></div>{{/constant}}
   {{else}}
     {{#if gameFinished}}
+      Game finished
       <ul>
         {{#each resultsList}}
         <li>{{user.displayName}} - {{value}}</li>

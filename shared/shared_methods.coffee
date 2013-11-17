@@ -76,7 +76,7 @@ Meteor.methods
     unfinished = _.find game.players, (player) ->
       !game.results[player]? or game.results[player].finished != true
     
-    unless unfinished
+    unless unfinished # wrap up game
       game.inProgress = false
       game.finished = true
     
@@ -85,6 +85,21 @@ Meteor.methods
         results: game.results
         inProgress: game.inProgress
         finished: game.finished
+    
+    unless unfinished # wrap up room
+      console.log game.results
+      resultsList = _.map game.results, (result, key) ->
+        obj = _.clone result
+        obj._id = key
+        obj
+      room.results = Wiblit[game.name].sortResults(resultsList)
+      room.inProgress = false
+      room.finished = true
+      Room.update _id: room._id,
+        $set:
+          results: room.results
+          inProgress: room.inProgress
+          finished: room.finished
   
   updateActivity: ->
     return unless @userId

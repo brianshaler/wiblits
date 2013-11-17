@@ -16,4 +16,5 @@
   invites: []
   players: []
   inRoom: []
+  results: []
   createdAt: new Date()
