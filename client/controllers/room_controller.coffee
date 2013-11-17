@@ -89,7 +89,7 @@ Meteor.startup ->
       setState STARTING
     if Session.get("timeLeft") < 0
       setState PLAYING
-    Session.set "isPlayer", true if Meteor.userId() and _.find game.players, (player) -> player._id == Meteor.userId()
+    Session.set "isPlayer", true if Meteor.userId() and _.find game.players, (player) -> player == Meteor.userId()
 
 Template.room.room = ->
   Session.get "currentRoom"
