@@ -10,7 +10,7 @@ Meteor.startup ->
       pruneActiveUsers room
       scheduleNewGame room
     #console.log "rooms to prune: #{rooms.length}"
-  , 2000
+  , 1000
 
 
 # prune inactive users in waiting area
@@ -28,7 +28,7 @@ pruneActiveUsers = (room) ->
 
 # Schedule game to start in {COUNTDOWN} seconds if enough players
 scheduleNewGame = (room) ->
-  if !room.starting and room.players.length > 1
+  if !room.starting and !room.inProgress and room.players.length > 1
     console.log "Start game! #{room._id} (in 6 seconds)"
     Room.update _id: room._id,
       $set:
@@ -37,13 +37,14 @@ scheduleNewGame = (room) ->
 
 startScheduledGames = ->
   # Create a game and start it if scheduled to start
-  rooms = Room.find({inProgress: false, startAt: {$lt: new Date()}}).fetch()
+  rooms = Room.find({starting: true, inProgress: false, startAt: {$lt: new Date()}}).fetch()
   _.each rooms, (room) ->
     game = _.clone GameSchema
     _.extend game, Games[0]
     game.roomId = room._id
     game.players = room.players
     gameId = Game.insert game
+    console.log "Creating a game for room #{room._id} (#{gameId})"
     
     duration = 60
     duration = game.duration if game.duration
@@ -52,6 +53,7 @@ startScheduledGames = ->
     Room.update _id: room._id,
       $set:
         inProgress: true
+        starting: false
         game: gameId
         finishAt: new Date Date.now()+duration*1000
         finished: false

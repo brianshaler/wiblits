@@ -24,11 +24,15 @@ timeoutId = null
 Session.set "startedCountdown", null
 Session.set "timeLeft", null
 Session.set "isPlayer", false
+Session.set "finishedPlaying", false
 
 # Room state
 Session.set "roomState", WAITING
 setState = (newState) ->
+  newState = WAITING unless Session.get "isPlayer"
   currentState = Session.get "roomState"
+  return if newState == currentState
+  
   console.log "setState: #{newState} (#{currentState})"
   if newState == PLAYING and currentState != PLAYING and currentState != STARTING
     newState = STARTING
@@ -72,6 +76,8 @@ Session.set "isPlayer", false
 
 Meteor.startup ->
   Deps.autorun ->
+    return unless Meteor.userId()
+    
     room = Room.findOne Session.get "roomId"
     return unless room
     
@@ -86,7 +92,12 @@ Meteor.startup ->
     return unless game
     
     currentState = Session.get "roomState"
-    if room.starting and currentState == WAITING
+    
+    Session.set "finishedPlaying", (game.results?[Meteor.userId()]?.finished == true)
+    if game.finished and currentState == PLAYING
+      setState WAITING
+    
+    if (room.starting or room.inProgress) and currentState == WAITING
       setState STARTING
     if room.inProgress and Session.get("timeLeft") < 0
       console.log "set state to PLAYING"

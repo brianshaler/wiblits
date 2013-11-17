@@ -8,7 +8,9 @@ class @Wiblit.HighNumber extends @Wiblit.Game
     return 1
   
   start: ->
+    return if @started == true
     super()
+    @started = true
     buttons =
       one: 1
       ten: 10
@@ -24,4 +26,5 @@ class @Wiblit.HighNumber extends @Wiblit.Game
       val = $(e.target).attr "data-value"
       @points = val
       @selection = $(e.target).html()
+      console.log "finished"
       @finish()

@@ -1,7 +1,9 @@
 <template name="game">
   {{#unless playerFinished}}
     <div id='game'>
-      {{#constant}}<div class="game-container"></div>{{/constant}}
+      {{#constant}}
+        {{> game_canvas}}
+      {{/constant}}
     </div>
   {{else}}
     <div id='game_finished'>
@@ -18,4 +20,8 @@
       {{/if}}
     </div>
   {{/unless}}
+</template>
+
+<template name="game_canvas">
+  <div class="game-container"></div>  
 </template>

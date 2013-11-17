@@ -40,6 +40,7 @@ class @App
         Session.set "timeLeft", null
         Session.set "isPlayer", false
         Session.set "roomState", "waiting"
+        Session.set "finishedPlaying", false
         Session.set "roomId", id
         Session.set "showRoom", true
         Session.set "createError", null

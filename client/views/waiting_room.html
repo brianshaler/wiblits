@@ -13,6 +13,17 @@
   {{else}}
     <h2>Game Room</h2>
   {{/if}}
+  
+  {{#if gameFinished}}
+  <div id='game_finished'>
+    <h3>Results</h3>
+    <ul class="list-unstyled">
+      {{#each resultsList}}
+      <li>{{user.displayName}} - {{value}}</li>
+      {{/each}}
+    </ul>
+  </div>
+  {{/if}}
 
   <div class='players'>
     <h3>Players</h3>

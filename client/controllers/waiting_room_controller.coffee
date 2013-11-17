@@ -17,6 +17,11 @@ Template.waiting_room.hasJoined = ->
       hasJoined = true
   hasJoined
 
+Template.waiting_room.gameFinished = ->
+  finished = false
+  game = Game.findOne Session.get "gameId"
+  if game?.finished then true else false
+
 Template.waiting_room.events
   "click .start-playing": (e) ->
     App.call "startPlaying", (err, data) ->

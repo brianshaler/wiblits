@@ -1,9 +1,11 @@
-Template.game.rendered = ->
+Template.game_canvas.rendered = ->
   game = Game.findOne Session.get "gameId"
   if game
-    console.log "game.rendered OK"
+    gameRendered = true
+    $(".game-container").html ""
     wg = new Wiblit[game.name]($(".game-container"))
     wg.start()
+    console.log "game.rendered OK"
 
 Template.game.playerFinished = ->
   Session.get "finishedPlaying"
@@ -17,4 +19,3 @@ Template.game.resultsList = ->
   room = Session.get "currentRoom"
   return [] unless room?.results?.length > 0
   room.results
-

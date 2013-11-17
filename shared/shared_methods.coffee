@@ -66,8 +66,10 @@ Meteor.methods
     if !room
       throw new Meteor.Error 404, "Room not found"
     if !room.game
-      throw new Meteor.Error 404, "Game not found"
+      throw new Meteor.Error 404, "Game ID not found"
     game = Game.findOne room.game
+    if !game
+      throw new Meteor.Error 404, "Game not found"
     
     # this is a race condition waiting to happen...
     game.results[@userId] = progress
@@ -80,6 +82,7 @@ Meteor.methods
       game.inProgress = false
       game.finished = true
     
+    console.log "saving results #{room.game}", game
     Game.update _id: game._id,
       $set:
         results: game.results
