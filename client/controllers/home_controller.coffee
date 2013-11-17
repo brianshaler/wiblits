@@ -29,3 +29,5 @@ Template.home.openRooms = ->
     if user._id == Meteor.userId()
       displayName += " (me)"
     {_id: user._id, displayName: displayName, roomId: roomsByOwner[user._id]}
+
+Template.home.displayName = -> UserHelper.getUserName()
