@@ -3,14 +3,13 @@
     {{#if stateWaiting}}
       {{> waiting_room}}
     {{/if}}
-
+    
     {{#if stateStarting}}
       {{> countdown}}
       {{> waiting_room}}
     {{/if}}
-
+    
     {{#if statePlaying}}
-      Game
       {{> game}}
     {{/if}}
   </div>
