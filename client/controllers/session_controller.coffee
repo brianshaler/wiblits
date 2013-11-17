@@ -18,13 +18,9 @@ Template.signup.events
     
     # If validation passes, supply the appropriate fields to the
     Meteor.loginWithPassword email, password, (err) ->
-      if err
-        console.log err
-        # The user might not have been found, or their passwword
-        # could be incorrect. Inform the user that their
-        # login attempt has failed. 
-      else
-        console.log 'success'
+      # Need to handle error, but fuckit...
+      unless err
+        Meteor.Router.to "/"
     
     # The user has been logged in.
     false
@@ -47,11 +43,9 @@ Template.register.events
       email: email
       password: password
     , (err) ->
-      if err
-        console.log err.get_stack()
-        # Inform the user that account creation failed
-      else
-        console.log 'success'
+      # Need to handle error, but fuckit...
+      unless err
+        Meteor.Router.to "/"
 
     # Success. Account has been created and the user
     # has logged in successfully. 
