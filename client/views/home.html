@@ -18,14 +18,16 @@
     {{#if currentUser}}
       <a class='start-party' href='#'>START</a>
       
-      <div class="game-room-list">
-        <h4>Public Game Rooms</h4>
-        <ul>
-          {{#each openRooms}}
-            <li class="users-list-item"><a href='#' class="join-room">{{displayListName}} &bull; Join</a></li>
-          {{/each}}
-        </ul>
-      </div>
+      {{#if hasOpenRooms}}
+        <div class="game-room-list">
+          <h4>Public Game Rooms</h4>
+          <ul>
+            {{#each openRooms}}
+              <li class="users-list-item"><a href='#' class="join-room">{{displayListName}} &bull; Join</a></li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/if}}
     {{else}}
       <a class='start' href='#'>START</a>
     {{/if}}
