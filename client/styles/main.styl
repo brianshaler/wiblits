@@ -6,8 +6,57 @@ header
   background-color: #fff
   text-align: center
   border-bottom: 5px solid #498bcc
+  padding: 35px 0
   h1
-    line-height: 150px
+    display: inline-block
+    padding-left: 20px
+    margin: 30px 0 0 0
+    vertical-align: top
+  .logo
+    width: 20*5px
+    height: 20*4px
+    position: relative
+    display: inline-block
+    .cube
+      width: 20%
+      height: 25%
+      position: absolute
+      background-color: #015f9b
+      display: block
+    .cube2, .cube4, .cube6, .cube7, .cube9
+      background-color: #2ea0e9
+    .cube1
+      top: 0
+      left: 0
+    .cube2
+      top: 25%
+      left: 0
+    .cube3
+      top: 50%
+      left: 0
+    .cube4
+      top: 75%
+      left: 20%
+    .cube5
+      top: 50%
+      left: 40%
+    .cube6
+      top: 25%
+      left: 40%
+
+    .cube7
+      top: 75%
+      left: 60%
+    
+    .cube8
+      top: 50%
+      left: 80%
+    .cube9
+      top: 25%
+      left: 80%
+    .cube10
+      top: 0
+      left: 80%
   
 
 .landing
@@ -21,8 +70,59 @@ header
       font-size: 20px
 
 .start
+  font-family: 'Press Start 2P', cursive
   display: inline-block
-  background-color: #fff
+  background-color: #ccddef
   padding: 15px 30px
   color: #222
-  font-family: 'Press Start 2P', cursive
+  &:hover
+    text-decoration: none
+    background-color: #fff
+
+.auth
+  margin-top: 20px
+  padding: 0 20%
+  color: #fff
+  a
+    color: #fff
+    &:hover
+      color: #99d3f8
+
+  input
+    font-family: 'Press Start 2P', cursive
+    display: block
+    background-color: #fff
+    border: 2px solid #222
+    padding: 3%
+    width: 100%
+  button, .twit-auth
+    font-family: 'Press Start 2P', cursive
+    display: inline-block
+    background-color: #ccddef
+    padding: 5px 15px
+    color: #222
+    border: 0
+    &:hover
+      text-decoration: none
+      color: #000
+      background-color: #fff
+  .twit-auth
+    width: 100%
+    padding: 3%
+    text-align: center
+  .or
+    text-align: center
+    position: relative
+    border-bottom: 1px solid #498bcc
+    margin: 40px 0
+    span
+      position: absolute
+      width: 10%
+      margin-left: -5%
+      left: 50%
+      top: -10px
+      background-color: #0053b0
+  .text-right
+    text-align: right
+#go_to_login, #go_to_register
+  padding-right: 20px

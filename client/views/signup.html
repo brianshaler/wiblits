@@ -1,11 +1,27 @@
 <template name="signup">
-  <a href='#' id="login_twitter">Login with Twitter</a>
+  <div class='auth'>
+    <h4>Log In</h4>
 
-  <form id="login-form" action="action">
-    <input type="email" id="login-email" />
-    <input type="password" id="login-password" />
-    <button type='submit'><i class='fa fa-sign-in'></i> Sign In</button>
-  </form>
+    <a href='#' class='twit-auth' id="login_twitter">Login with Twitter <i class='fa fa-twitter'></i></a>
+    
+    <div class='or'><span>OR</span></div>
+    
+    <form role="form" id="login_form">
+      <div class="form-group">
+        <label for="login_email">Email address</label>
+        <input type="email" id="login_email" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="login_password">Password</label>
+        <input type="password" id="login_password" placeholder="Password">
+      </div>
+
+      <div class='text-right'>
+        <a href='#' id='go_to_register'>Register</a>
+        <button type="submit">Log In</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <template name="logout">
@@ -32,9 +48,27 @@
 </template>
 
 <template name="register">
-  <form id="register-form" action="action">
-    <input type="email" id="account-email" />
-    <input type="password" id="account-password" />
-    <button type='submit'><i class='fa fa-sign-in'></i> Create an Account</button>
-  </form>
+  <div class='auth'>
+    <h4>Create an Account</h4>
+    
+    <a href='#' class='twit-auth' id="register_twitter">Register with Twitter <i class='fa fa-twitter'></i></a>
+    
+    <div class='or'><span>OR</span></div>
+
+    <form id="register-form" role="form">
+      <div class="form-group">
+        <label for="account_email">Email address</label>
+        <input type="email" id="account_email" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="account_password">Password</label>
+        <input type="password" id="account_password" placeholder="Password">
+      </div>
+
+      <div class='text-right'>
+        <a href='#' id='go_to_login'>Log In</a>
+        <button type="submit">Register</button>
+      </div>
+    </form>
+  </div>
 </template>
