@@ -68,6 +68,7 @@ checkCountdown = ->
     Session.set "startedAt", new Date()
 
 
+Session.set "isPlayer", false
 Meteor.startup ->
   Deps.autorun ->
     room = Room.findOne Session.get "roomId"
@@ -88,7 +89,7 @@ Meteor.startup ->
       setState STARTING
     if Session.get("timeLeft") < 0
       setState PLAYING
-    Session.set "isPlayer", true if _.find game.players, (player) -> player._id == Meteor.userId()
+    Session.set "isPlayer", true if Meteor.userId() and _.find game.players, (player) -> player._id == Meteor.userId()
 
 Template.room.room = ->
   Session.get "currentRoom"
@@ -114,9 +115,12 @@ Template.room.players = ->
 
 
 
-Template.room.stateStarting = -> STARTING == Session.get "roomState"
-Template.room.stateWaiting = -> WAITING == Session.get "roomState"
-Template.room.statePlaying = -> PLAYING == Session.get "roomState"
+Template.room.stateStarting = ->
+  STARTING == Session.get("roomState") or !Session.get("isPlayer")
+Template.room.stateWaiting = ->
+  WAITING == Session.get("roomState") and Session.get("isPlayer")
+Template.room.statePlaying = ->
+  PLAYING == Session.get("roomState") and Session.get("isPlayer")
 
 Template.room.startingAndJoined = ->
   return false

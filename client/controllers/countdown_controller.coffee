@@ -7,7 +7,7 @@ Meteor.startup ->
     return unless room
     
 
-Template.starting.timeLeft = ->
+Template.countdown.timeLeft = ->
   timeLeft = Math.floor Session.get "timeLeft"
   timeLeft = 0 unless timeLeft > 0
   timeLeft
