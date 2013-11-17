@@ -1,16 +1,21 @@
 <template name="game">
   {{#unless playerFinished}}
-    {{#constant}}<div class="game-container"></div>{{/constant}}
+    <div id='game'>
+      {{#constant}}<div class="game-container"></div>{{/constant}}
+    </div>
   {{else}}
-    {{#if gameFinished}}
-      <ul>
-        {{#each resultsList}}
-        <li>{{user.displayName}} - {{value}}</li>
-        {{/each}}
-      </ul>
-    {{else}}
-      <h3>Done!</h3>
-      <p>Waiting for other players</p>
-    {{/if}}
+    <div id='game_finished'>
+      {{#if gameFinished}}
+        <h3>Results</h3>
+        <ul class="list-unstyled">
+          {{#each resultsList}}
+          <li>{{user.displayName}} - {{value}}</li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <h3>Done!</h3>
+        <p>Waiting for other players</p>
+      {{/if}}
+    </div>
   {{/unless}}
 </template>
