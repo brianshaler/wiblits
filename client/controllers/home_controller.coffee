@@ -24,9 +24,8 @@ Template.home.openRooms = ->
   
   list = Meteor.users.find({_id: {"$in": ownerIds}}).fetch()
   _.map list, (user) ->
-    displayName = "Anonymous"
-    displayName = user.profile.name if user.profile?.name?
-    displayName = user.emails[0].address if user.emails?.length > 0 and user.emails[0].address?
+    displayName = UserHelper.getUserName(user)
+    
     if user._id == Meteor.userId()
       displayName += " (me)"
     {_id: user._id, displayName: displayName, roomId: roomsByOwner[user._id]}
