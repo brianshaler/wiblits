@@ -13,7 +13,10 @@ Template.home.events
   "click .join-room": (e) ->
     e.preventDefault()
     roomId = @.roomId
-    Meteor.Router.to "/room/#{roomId}"
+    
+    if Meteor.user()?
+      Meteor.call "joinRoom", roomId, (err, data) ->
+        Meteor.Router.to "/room/#{roomId}"
 
 
 Template.home.openRooms = ->
