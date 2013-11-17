@@ -7,6 +7,17 @@ Template.waiting_room.isOwner = ->
 Template.waiting_room.players = ->
   Template.room.players()
 
+Template.waiting_room.hasJoined = ->
+  hasJoined = false;
+  currentRoom = Session.get "currentRoom"
+  return [] unless currentRoom
+  list = Meteor.users.find({_id: {"$in": currentRoom.players}}).fetch()
+  _.map list, (user) ->
+    if user._id is Meteor.userId()
+      hasJoined = true
+  console.log hasJoined
+  hasJoined
+
 Template.waiting_room.events
   "click .start-playing": (e) ->
     App.call "startPlaying", (err, data) ->

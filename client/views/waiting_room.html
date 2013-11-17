@@ -14,8 +14,6 @@
     <h2>Game Room</h2>
   {{/if}}
 
-  <button class="join-room">Join Game</button>
-
   <div class='players'>
     <h3>Players</h3>
     <ul class="list-unstyled">
@@ -23,5 +21,13 @@
         <li>{{displayName}}</li>
       {{/each}}
     </ul>
+  </div>
+
+  <div class='join'>
+    {{#if hasJoined}}
+      You are in the Game, it will start in a bit.
+    {{else}}
+      <button class="join-room">Join Game</button>
+    {{/if}}
   </div>
 </template>

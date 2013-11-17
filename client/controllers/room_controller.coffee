@@ -113,17 +113,12 @@ Template.room.players = ->
       displayName += " (me)"
     {_id: user._id, displayName: displayName, lastActivity: user.lastActivity}
 
-
-
 Template.room.stateStarting = ->
   STARTING == Session.get("roomState") or !Session.get("isPlayer")
 Template.room.stateWaiting = ->
   WAITING == Session.get("roomState") and Session.get("isPlayer")
 Template.room.statePlaying = ->
   PLAYING == Session.get("roomState") and Session.get("isPlayer")
-
-Template.room.startingAndJoined = ->
-  return false
 
 Template.room.events
   "click .join-room": (e) ->
