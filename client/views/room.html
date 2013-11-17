@@ -1,13 +1,16 @@
 <template name="room">
   <h2>Game Room</h2>
-
-  {{#if startingAndJoined}}
-    {{#if showCountdown}}
-      {{> starting}}
-    {{else}}
-      {{> game}}
-    {{/if}}
-  {{else}}
-    {{> waiting_room}}  
+  
+  {{#if stateWaiting}}
+    {{> waiting_room}}
   {{/if}}
+  
+  {{#if stateStarting}}
+    {{> starting}}
+  {{/if}}
+  
+  {{#if statePlaying}}
+    {{> game}}
+  {{/if}}
+  
 </template>

@@ -8,10 +8,6 @@ Template.waiting_room.players = ->
   Template.room.players()
 
 Template.waiting_room.events
-  "click .start-playing": (e) ->
-    App.call "startPlaying", (err, data) ->
-      throw err if err
-      console.log "room started?"
   "click .make-public": (e) ->
     App.call "makePublic", true, (err, data) ->
       throw err if err

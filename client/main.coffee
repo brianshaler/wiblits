@@ -19,18 +19,6 @@ class @App
         # hack
         lastUpdate = Session.set "lastUpdate", Date.now()
         
-        roomId = Session.get "roomId"
-        if roomId
-          currentRoom = Room.findOne roomId
-          if currentRoom
-            Session.set "currentRoom", currentRoom
-            if currentRoom.starting and !gameStarted
-              gameStarted = true
-              Session.set "timeLeft", COUNTDOWN
-              Session.set "countingDown", true
-            if currentRoom.game
-              Session.set "gameId", currentRoom.game
-        
   # adds roomId as first parameter after method in Meteor.call()
   @call: () =>
     args = _.toArray arguments
