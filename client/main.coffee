@@ -3,26 +3,30 @@ Meteor.subscribe "allUsers"
 
 @initRoutes()
 
+gameStarted = false
+COUNTDOWN = 6
 
 class @App
   constructor: ->
     Meteor.startup =>
       #root.viewport = new Viewporter "outer-container", fullHeightPortrait: false
       
-      Session.set "twitterFriends", []
-      
       # hack
       Deps.autorun =>
         lastUpdate = Session.set "lastUpdate", Date.now()
         
-        if Meteor.userId() and 1==2
-          App.call "getTwitterFriends",
-            (err, data) =>
-              if err and err.reason
-                console.log err
-              else
-                Session.set "twitterFriends", data
-  
+        roomId = Session.get "roomId"
+        if roomId
+          currentRoom = Room.findOne roomId
+          if currentRoom
+            Session.set "currentRoom", currentRoom
+            if currentRoom.starting and !gameStarted
+              gameStarted = true
+              Session.set "timeLeft", COUNTDOWN
+              Session.set "countingDown", true
+            if currentRoom.game
+              Session.set "gameId", currentRoom.game
+        
   # adds roomId as first parameter after method in Meteor.call()
   @call: () =>
     args = _.toArray arguments
@@ -58,8 +62,3 @@ class @App
 app = @app = new @App()
 
 Template.page.showRoom = -> Session.get "showRoom"
-
-
-Deps.autorun =>
-  $('body').removeClass()
-  $("body").addClass("home")  if Session.get "showRoom"

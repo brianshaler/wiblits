@@ -4,4 +4,7 @@
     your friends.
   </p>
   <a class='btn btn-default start' href='/login'>Start Gaming Now</a>
+  {{#if currentUser}}
+    {{> start}}
+  {{/if}}
 </template>

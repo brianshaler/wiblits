@@ -1,5 +1,5 @@
 Template.waiting_room.room = ->
-  Template.room.room()
+  Session.get "currentRoom"
 
 Template.waiting_room.isOwner = ->
   Template.room.isOwner()

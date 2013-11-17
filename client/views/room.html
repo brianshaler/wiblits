@@ -1,8 +1,12 @@
 <template name="room">
   <h2>room template</h2>
   <h4>{{room._id}}</h4>
-  {{#if room.started}}
-    room started!
+  {{#if room.starting}}
+    {{#if showCountdown}}
+      {{> starting}}
+    {{else}}
+      room started!
+    {{/if}}
   {{else}}
     {{> waiting_room}}
   {{/if}}

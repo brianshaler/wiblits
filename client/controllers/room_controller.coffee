@@ -1,25 +1,24 @@
 intervalId = null
 
-
 # heartbeat
-Deps.autorun ->
-  roomId = Session.get "roomId"
-  if roomId
-    unless intervalId
-      App.call "updateActivity" if App?
-      intervalId = Meteor.setInterval ->
+Meteor.startup ->
+  Deps.autorun ->
+    if Session.get "roomId"
+      unless intervalId
         App.call "updateActivity" if App?
-      , 5000
-  else
-    if intervalId
-      Meteor.clearInterval intervalId
-      intervalId = null
-
+        intervalId = Meteor.setInterval ->
+          App.call "updateActivity" if App?
+        , 5000
+    else
+      if intervalId
+        Meteor.clearInterval intervalId
+        intervalId = null
 
 Template.room.room = ->
-  currentRoom = Room.findOne Session.get "roomId"
-  Session.set "currentRoom", currentRoom
-  currentRoom
+  Session.get "currentRoom"
+
+Template.room.showCountdown = ->
+  Session.get("timeLeft") > 0
 
 Template.room.isOwner = ->
   currentRoom = Session.get "currentRoom"
