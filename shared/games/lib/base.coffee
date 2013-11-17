@@ -7,6 +7,13 @@ class @Wiblit.Game
     @lives = 0
     @selection = ""
   
+  @sortResults: (results) ->
+    results.sort @compareTwoResults
+  
+  @compareTwoResults: (result1, result2) ->
+    console.log "Game.compareTwoResults"
+    result1 > result2
+  
   start: ->
     Session.set "finishedPlaying", false
   

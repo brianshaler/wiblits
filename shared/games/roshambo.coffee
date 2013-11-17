@@ -1,6 +1,19 @@
 class @Wiblit.Roshambo extends @Wiblit.Game
+  @moves =
+    rock:
+      beats: (other) -> other == "scissors"
+    paper:
+      beats: (other) -> other == "rock"
+    scissors:
+      beats: (other) -> other == "scissors"
+  
   constructor: (@el) ->
     super @el
+  
+  @compareTwoResults: (result1, result2) ->
+    console.log "does #{result1.selection} beat #{result2.selection}?"
+    return -1 if Wiblit.Roshambo.moves[result1.selection]?.beats(result2.selection)
+    return 1
   
   start: ->
     super()
