@@ -20,7 +20,8 @@ Template.signup.events
       unless err
         roomId = Session.get "roomId"
         if roomId?
-          Meteor.Router.to "/room/#{roomId}"
+          Meteor.call "joinRoom", roomId, (err, data) ->
+            Meteor.Router.to "/room/#{roomId}"
         else
           Meteor.Router.to "/"
     
@@ -48,7 +49,8 @@ Template.register.events
       unless err
         roomId = Session.get "roomId"
         if roomId?
-          Meteor.Router.to "/room/#{roomId}"
+          Meteor.call "joinRoom", roomId, (err, data) ->
+            Meteor.Router.to "/room/#{roomId}"
         else
           Meteor.Router.to "/"
 
