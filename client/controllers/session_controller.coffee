@@ -10,20 +10,17 @@ Template.signup.events
     e.preventDefault()
     
     # retrieve the input field values
-    email = t.find("#login_email").value
-    password = t.find("#login_password").value
+    email = $("#login_email").val()
+    password = $("#login_password").val()
+    console.log email, password
     
     # Trim and validate your fields here.... 
     
     # If validation passes, supply the appropriate fields to the
     Meteor.loginWithPassword email, password, (err) ->
-      if err
-        console.log err
-        # The user might not have been found, or their passwword
-        # could be incorrect. Inform the user that their
-        # login attempt has failed. 
-      else
-        console.log 'success'
+      # Need to handle error, but fuckit...
+      unless err
+        Meteor.Router.to "/"
     
     # The user has been logged in.
     false
@@ -37,19 +34,18 @@ Template.register.events
     e.preventDefault()
 
     # retrieve the input field values
-    email = t.find("#account_email").value
-    password = t.find("#account_password").value
+    email = $("#account_email").val()
+    password = $("#account_password").val()
+    console.log email, password
     
     # Trim and validate the input
     Accounts.createUser
       email: email
       password: password
     , (err) ->
-      if err
-        console.log err
-        # Inform the user that account creation failed
-      else
-        console.log 'success'
+      # Need to handle error, but fuckit...
+      unless err
+        Meteor.Router.to "/"
 
     # Success. Account has been created and the user
     # has logged in successfully. 
