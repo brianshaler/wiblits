@@ -122,12 +122,6 @@ Template.room.startingAndJoined = ->
   return false
 
 Template.room.events
-  "click .make-public": (e) ->
-    App.call "makePublic", true, (err, data) ->
-      throw err if err
-  "click .make-private": (e) ->
-    App.call "makePublic", false, (err, data) ->
-      throw err if err
   "click .join-room": (e) ->
     roomId = Session.get "roomId"
     
