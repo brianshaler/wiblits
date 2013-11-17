@@ -27,8 +27,6 @@ Template.waiting_room.resultsList = ->
   return [] unless room?.results?.length > 0
   room.results
 
-
-
 Template.waiting_room.events
   "click .start-playing": (e) ->
     App.call "startPlaying", (err, data) ->

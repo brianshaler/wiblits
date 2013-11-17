@@ -26,5 +26,6 @@ class @Wiblit.HighNumber extends @Wiblit.Game
       val = $(e.target).attr "data-value"
       @points = val
       @selection = $(e.target).html()
+      @value = @points
       console.log "finished"
       @finish()

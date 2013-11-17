@@ -93,7 +93,7 @@ Meteor.methods
       console.log game.results
       resultsList = _.map game.results, (result, key) ->
         obj = _.clone result
-        obj._id = key
+        obj.displayName = UserHelper.getUserName Meteor.users.findOne key
         obj
       room.results = Wiblit[game.name].sortResults(resultsList)
       room.inProgress = false

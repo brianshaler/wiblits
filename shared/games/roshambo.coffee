@@ -28,4 +28,5 @@ class @Wiblit.Roshambo extends @Wiblit.Game
       val = $(e.target).attr "data-value"
       @selection = val
       console.log "finish!"
-      #@finish()
+      @value = @selection
+      @finish()

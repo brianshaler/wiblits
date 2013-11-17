@@ -7,6 +7,7 @@ class @Wiblit.Game
     @lives = 0
     @selection = ""
     @started = false
+    @value = ""
   
   @sortResults: (results) ->
     results.sort @compareTwoResults
@@ -27,6 +28,7 @@ class @Wiblit.Game
       progress: @progress
       lives: @lives
       selection: @selection
+      value: @value
     App.call "gameProgress", status, (err, data) ->
       throw err if err
   
@@ -37,6 +39,7 @@ class @Wiblit.Game
       progress: @progress
       lives: @lives
       selection: @selection
+      value: @value
     App.call "gameFinish", status, (err, data) ->
       throw err if err
 
