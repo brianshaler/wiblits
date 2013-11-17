@@ -1,13 +1,31 @@
 <template name="home">
   <div class='landing'>
-    <p>
-      Mini games with
-      <br>
-      <span>your friends</span>.
-    </p>
-    
     {{#if currentUser}}
-      {{> start}}
+      <p>
+        Welcome, <b>{{UserHelper.getUserName}}</b>,<br>
+        Lets play some Mini Games with
+        <br>
+        <span>your friends</span>.
+      </p>
+    {{else}}
+      <p>
+        Mini Games with
+        <br>
+        <span>your friends</span>.
+      </p>
+    {{/if}}
+
+    {{#if currentUser}}
+      <a class='start-party' href='#'>START</a>
+      
+      <div class="game-room-list">
+        <h4>Public Game Rooms</h4>
+        <ul>
+          {{#each openRooms}}
+            <li class="users-list-item"><a href='#' class="join-room">{{displayName}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
     {{else}}
       <a class='start' href='#'>START</a>
     {{/if}}

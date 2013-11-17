@@ -10,8 +10,9 @@ Template.signup.events
     e.preventDefault()
     
     # retrieve the input field values
-    email = t.find("#login_email").value
-    password = t.find("#login_password").value
+    email = $("#login_email").val()
+    password = $("#login_password").val()
+    console.log email, password
     
     # Trim and validate your fields here.... 
     
@@ -37,8 +38,9 @@ Template.register.events
     e.preventDefault()
 
     # retrieve the input field values
-    email = t.find("#account_email").value
-    password = t.find("#account_password").value
+    email = $("#account_email").val()
+    password = $("#account_password").val()
+    console.log email, password
     
     # Trim and validate the input
     Accounts.createUser
@@ -46,7 +48,7 @@ Template.register.events
       password: password
     , (err) ->
       if err
-        console.log err
+        console.log err.get_stack()
         # Inform the user that account creation failed
       else
         console.log 'success'
