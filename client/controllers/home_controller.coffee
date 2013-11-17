@@ -30,4 +30,13 @@ Template.home.openRooms = ->
       displayName += " (me)"
     {_id: user._id, displayListName: displayName, roomId: roomsByOwner[user._id]}
 
+Template.home.hasOpenRooms = ->
+  rooms = Room.find({inProgress: false}, {sort: {createdAt: -1}}).fetch()
+  ownerIds = _.map rooms, (room) -> room.owner
+  roomsByOwner = {}
+  _.each rooms, (room) -> roomsByOwner[room.owner] = room._id unless roomsByOwner[room.owner]?
+  
+  list = Meteor.users.find({_id: {"$in": ownerIds}}).fetch()
+  return list.length > 0
+
 Template.home.displayName = -> UserHelper.getUserName()
