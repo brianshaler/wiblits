@@ -46,7 +46,7 @@ startCountdown = ->
   console.log "starting countdown"
   Session.set "startedCountdown", Date.now()
   Session.set "timeLeft", 6
-  checkCountdown()
+  timeoutId = Meteor.setTimeout checkCountdown, 100
 
 checkCountdown = ->
   return unless Session.get("roomState") == STARTING
@@ -62,7 +62,7 @@ checkCountdown = ->
   
   if timeLeft > -1
     Session.set "timeLeft", timeLeft
-    timeoutId = Meteor.setTimeout checkCountdown, 1000
+    timeoutId = Meteor.setTimeout checkCountdown, 100
   else
     Session.set "timeLeft", null
     Session.set "startedAt", new Date()
@@ -115,10 +115,10 @@ Template.room.players = ->
 
 
 
-Template.room.stateStarting = ->
-  STARTING == Session.get("roomState") or !Session.get("isPlayer")
 Template.room.stateWaiting = ->
-  WAITING == Session.get("roomState") and Session.get("isPlayer")
+  WAITING == Session.get("roomState") or !Session.get("isPlayer")
+Template.room.stateStarting = ->
+  STARTING == Session.get("roomState") and Session.get("isPlayer")
 Template.room.statePlaying = ->
   PLAYING == Session.get("roomState") and Session.get("isPlayer")
 
