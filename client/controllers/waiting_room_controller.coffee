@@ -13,14 +13,8 @@ Template.waiting_room.events
       throw err if err
       console.log "room started?"
   "click .make-public": (e) ->
-    console.log "make-public"
     App.call "makePublic", true, (err, data) ->
       throw err if err
   "click .make-private": (e) ->
-    console.log "make-private"
     App.call "makePublic", false, (err, data) ->
       throw err if err
-  "click .join-room": (e) ->
-    roomId = Session.get "roomId"
-    Meteor.call "joinRoom", roomId, (err, data) ->
-      Meteor.Router.to "/room/#{roomId}"

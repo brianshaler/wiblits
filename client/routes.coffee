@@ -14,8 +14,13 @@
     "stuff to do before routing.."
   
   Meteor.Router.add
-    "/room/:id":
+    "/room/join/:id":
       as: "roomPage"
+      to: (id) ->
+        App.loadRoom id
+        "room_joined"
+    "/room/:id":
+      as: "roomJoinPage"
       to: (id) ->
         App.loadRoom id
         "page"
