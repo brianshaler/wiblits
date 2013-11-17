@@ -1,35 +1,5 @@
 gameRendered = false
 
-WAITING = "waiting"
-STARTING = "starting"
-PLAYING = "playing"
-
-gameState = (newState) ->
-  if newState == STARTING and Session.get("gameState") == WAITING
-    Session.set "timeLeft", 6
-  Session.set "gameState", newState
-
-# Game state
-Session.set "gameState", "waiting"
-
-Meteor.startup ->
-  Deps.autorun ->
-    game = Game.findOne Session.get "gameId"
-    if game
-      
-    else
-      gameState "waiting"
-    
-
-
-findGame = (gameId) ->
-  
-
-Scoring =
-  
-  sortResults: (game, results) ->
-    
-
 Template.game.rendered = ->
   game = Game.findOne Session.get "gameId"
   if game and !gameRendered
@@ -61,3 +31,5 @@ Template.game.resultsList = ->
   results
   
 #  if game?.inProgress and !
+
+Template.game

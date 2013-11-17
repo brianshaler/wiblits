@@ -1,13 +1,15 @@
 <template name="room">
   <div class='game-room'>
-    {{#if startingAndJoined}}
-      {{#if showCountdown}}
-        {{> starting}}
-      {{else}}
-        {{> game}}
-      {{/if}}
-    {{else}}
-      {{> waiting_room}}  
-    {{/if}}
+  {{#if stateWaiting}}
+    {{> waiting_room}}
+  {{/if}}
+  
+  {{#if stateStarting}}
+    {{> starting}}
+  {{/if}}
+  
+  {{#if statePlaying}}
+    {{> game}}
+  {{/if}}
   </div>
 </template>
