@@ -69,6 +69,7 @@ checkCountdown = ->
 
 
 Session.set "isPlayer", false
+
 Meteor.startup ->
   Deps.autorun ->
     room = Room.findOne Session.get "roomId"
@@ -88,6 +89,7 @@ Meteor.startup ->
     if room.starting and currentState == WAITING
       setState STARTING
     if room.inProgress and Session.get("timeLeft") < 0
+      console.log "set state to PLAYING"
       setState PLAYING
     Session.set "isPlayer", true if Meteor.userId() and _.find game.players, (player) -> player == Meteor.userId()
 
