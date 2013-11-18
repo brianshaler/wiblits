@@ -14,23 +14,23 @@ class @Wiblit.Roshambo extends @Wiblit.Game
   @compareTwoResults: (result1, result2) ->
     return 1 if result1.selection == ""
     return -1 if result2.selection == ""
-    console.log "is #{result1.points} higher than #{result2.points}?"
+    #console.log "is #{result1.points} higher than #{result2.points}?"
     return -1 if result1.points > result2.points
     return 1
   
   @onFinish: (results) ->
-    console.log "RESULTS", results
+    #console.log "RESULTS", results
     #return results
     _.each results, (result, key) ->
       result.points = _.reduce results, (memo, otherResult) ->
         if Wiblit.Roshambo.moves[result.selection]?.beats(otherResult.selection)
-          console.log "#{result.selection} beats #{otherResult.selection}"
+          #console.log "#{result.selection} beats #{otherResult.selection}"
           memo+1
         else
           memo
       , 0
-      console.log "result"
-      console.log result
+      #console.log "result"
+      #console.log result
       result.value = "#{result.points} (#{result.selection})"
       result.value = "FAIL" if result.selection == ""
       result
@@ -48,6 +48,6 @@ class @Wiblit.Roshambo extends @Wiblit.Game
     $(".game-select", @el).click (e) =>
       val = $(e.target).attr "data-value"
       @selection = val
-      console.log "finish!"
+      #console.log "finish!"
       @value = @selection
       @finish()

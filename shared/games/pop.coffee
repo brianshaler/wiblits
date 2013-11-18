@@ -8,12 +8,12 @@ class @Wiblit.Pop extends @Wiblit.Game
     @description = "Pop the blue bubbles! Don't pop the red ones."
   
   @compareTwoResults: (result1, result2) ->
-    console.log "is #{result1.points} higher than #{result2.points}?"
+    #console.log "is #{result1.points} higher than #{result2.points}?"
     return -1 if result1.points > result2.points
     return 1
   
   start: =>
-    console.log "START Pop!"
+    #console.log "START Pop!"
     super()
     @canvas = $("<canvas>")
     @ctx = @canvas[0].getContext "2d"
@@ -39,19 +39,19 @@ class @Wiblit.Pop extends @Wiblit.Game
     touchEvent = "mousedown"
     touchEvent = "touchstart" if window.ontouchstart
     
-    console.log "touchEvent", touchEvent
+    #console.log "touchEvent", touchEvent
     
     @canvas.bind touchEvent, (e) =>
       _.each @bubbles, (bubble) =>
         if bubble.testHit e.offsetX, e.offsetY, window.innerWidth, window.innerHeight
-          console.log "Hit a bubble!"
+          #console.log "Hit a bubble!"
           bubble.popped = true
           if bubble.isTarget
             @points++
           else
             @points -= 5
         else
-          console.log "Nope!"
+          #console.log "Nope!"
     #bubble.testHit
     
     @render()
@@ -96,8 +96,8 @@ class Bubble
   testHit: (x, y, w, h) =>
     _x = @x*w
     _y = @y*h
-    if @rad > 0
-      console.log "testHit", x, y, w, h, _x, _y, @rad
+    #if @rad > 0
+    #  console.log "testHit", x, y, w, h, _x, _y, @rad
     dist = Math.sqrt Math.pow(x-_x,2) + Math.pow(y-_y,2)
     dist < @rad
   

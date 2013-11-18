@@ -6,7 +6,7 @@ class @Wiblit.HighNumber extends @Wiblit.Game
     @description = "Click the highest number"
   
   @compareTwoResults: (result1, result2) ->
-    console.log "is #{result1.points} higher than #{result2.points}?"
+    #console.log "is #{result1.points} higher than #{result2.points}?"
     return -1 if result1.points > result2.points
     return 1
   

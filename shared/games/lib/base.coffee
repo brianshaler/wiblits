@@ -20,7 +20,7 @@ class @Wiblit.Game
     results.sort @compareTwoResults
   
   @compareTwoResults: (result1, result2) ->
-    console.log "Game.compareTwoResults"
+    #console.log "Game.compareTwoResults"
     result1 > result2
   
   @onFinish: (results) -> results
@@ -50,7 +50,7 @@ class @Wiblit.Game
   
   finish: ->
     return if @finished
-    console.log "base, broadcast FINISH"
+    #console.log "base, broadcast FINISH"
     @finished = true
     Session.set "finishedPlaying", true
     status =

@@ -30,7 +30,7 @@ Template.game_canvas.rendered = ->
     $(".game-container").html ""
     wg = new Wiblit[game.name]($(".game-container"))
     wg.start()
-    console.log "game.rendered OK"
+    #console.log "game.rendered OK"
 
 Template.game_canvas.gameId = ->
   Session.get "gameId"

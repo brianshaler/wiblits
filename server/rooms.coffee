@@ -29,7 +29,7 @@ pruneActiveUsers = (room) ->
 # Schedule game to start in {COUNTDOWN} seconds if enough players
 scheduleNewGame = (room) ->
   if !room.starting and !room.inProgress and room.players.length > 1
-    console.log "Start game! #{room._id} (in 6 seconds)"
+    #console.log "Start game! #{room._id} (in 6 seconds)"
     Room.update _id: room._id,
       $set:
         starting: true
@@ -44,7 +44,7 @@ startScheduledGames = ->
     game.roomId = room._id
     game.players = room.players
     gameId = Game.insert game
-    console.log "Creating a game for room #{room._id} (#{gameId})"
+    #console.log "Creating a game for room #{room._id} (#{gameId})"
     
     duration = 60
     duration = game.duration if game.duration
@@ -66,7 +66,7 @@ endFinishedGames = ->
     game = Game.findOne room.game
     
     room.results = Wiblit[game.name].sortResults(game.results)
-    console.log "Okay, #{room._id} is actually starting now"
+    #console.log "Okay, #{room._id} is actually starting now"
     Room.update _id: room._id,
       $set:
         inProgress: false
