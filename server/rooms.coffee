@@ -40,7 +40,7 @@ startScheduledGames = ->
   rooms = Room.find({starting: true, inProgress: false, startAt: {$lt: new Date()}}).fetch()
   _.each rooms, (room) ->
     game = _.clone GameSchema
-    _.extend game, Games[0]
+    _.extend game, Games[Math.floor Math.random()*Games.length]
     game.roomId = room._id
     game.players = room.players
     gameId = Game.insert game

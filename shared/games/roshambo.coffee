@@ -5,13 +5,15 @@ class @Wiblit.Roshambo extends @Wiblit.Game
     paper:
       beats: (other) -> other == "rock"
     scissors:
-      beats: (other) -> other == "scissors"
+      beats: (other) -> other == "paper"
   
   constructor: (@el) ->
     super @el
     @duration = 11
   
   @compareTwoResults: (result1, result2) ->
+    return 1 if result1.selection == ""
+    return -1 if result2.selection == ""
     console.log "is #{result1.points} higher than #{result2.points}?"
     return -1 if result1.points > result2.points
     return 1
@@ -30,6 +32,7 @@ class @Wiblit.Roshambo extends @Wiblit.Game
       console.log "result"
       console.log result
       result.value = "#{result.points} (#{result.selection})"
+      result.value = "FAIL" if result.selection == ""
       result
     results
   
