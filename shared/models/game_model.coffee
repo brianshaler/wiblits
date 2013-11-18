@@ -13,8 +13,10 @@
   results: {}
   createdAt: new Date()
 
-gameNames = ["HighNumber", "Roshambo", "Pop"]
+gameNames = ["Roshambo", "Pop", "HighNumber"]
 games = []
+gamesByName = {}
+
 addGame = (name) ->
   wg = new Wiblit[name]()
   obj =
@@ -23,8 +25,10 @@ addGame = (name) ->
     description: wg.description
     duration: wg.duration
   games.push obj
+  gamesByName[name] = obj
 
 Meteor.startup ->
   _.each gameNames, (name) -> addGame name
 
 @Games = games
+@GamesByName = gamesByName

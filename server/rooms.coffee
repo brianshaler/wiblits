@@ -57,6 +57,7 @@ startScheduledGames = ->
         game: gameId
         finishAt: new Date Date.now()+duration*1000
         finished: false
+        results: []
 
 endFinishedGames = ->
   # Create a game and start it if scheduled to start

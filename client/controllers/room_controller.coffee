@@ -33,21 +33,20 @@ setState = (newState) ->
   currentState = Session.get "roomState"
   return if newState == currentState
   
-  console.log "setState: #{newState} (#{currentState})"
   if newState == PLAYING and currentState != PLAYING and currentState != STARTING
     newState = STARTING
   if newState == STARTING and currentState != STARTING
-    console.log "start countdown? #{Session.get("timeLeft")}"
     unless typeof Session.get("timeLeft") == "number"
       startCountdown()
   if newState == PLAYING
     Session.set "timeLeft", null
+    game = Game.findOne Session.get("currentRoom").game
+    duration = Session.set "duration", GamesByName[game.name].duration
+    startedAt = Session.set "gameStartedAt", Date.now()
   #if newState == PLAYING and currentState != PLAYING
-  console.log "Setting current state", newState
   Session.set "roomState", newState
 
 startCountdown = ->
-  console.log "starting countdown"
   Session.set "startedCountdown", Date.now()
   Session.set "timeLeft", 6
   timeoutId = Meteor.setTimeout checkCountdown, 100
@@ -100,7 +99,6 @@ Meteor.startup ->
     if (room.starting or room.inProgress) and currentState == WAITING
       setState STARTING
     if room.inProgress and Session.get("timeLeft") < 0
-      console.log "set state to PLAYING"
       setState PLAYING
     Session.set "isPlayer", true if Meteor.userId() and _.find game.players, (player) -> player == Meteor.userId()
 

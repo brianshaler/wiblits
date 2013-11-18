@@ -82,7 +82,7 @@ Meteor.methods
       game.inProgress = false
       game.finished = true
     
-    console.log "saving results #{room.game}", game
+    #console.log "saving results #{room.game}", game
     Game.update _id: game._id,
       $set:
         results: game.results
@@ -90,8 +90,9 @@ Meteor.methods
         finished: game.finished
     
     unless unfinished # wrap up room
-      console.log game.results
-      resultsList = _.map game.results, (result, key) ->
+      #console.log game.results
+      results = Wiblit[game.name].onFinish game.results
+      resultsList = _.map results, (result, key) ->
         obj = _.clone result
         obj.displayName = UserHelper.getUserName Meteor.users.findOne key
         obj

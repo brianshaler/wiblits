@@ -4,7 +4,7 @@
       {{#constant}}
         {{> game_canvas}}
       {{/constant}}
-      <div id='game_timer'>Game Time Left: <span><b>13</b>s</span></div>
+        <div id='game_timer'>Game Time Left: <span><b>{{timeRemaining}}</b>s</span></div>
     </div>
   {{else}}
     <div id='game_finished'>
@@ -15,5 +15,7 @@
 </template>
 
 <template name="game_canvas">
-  <div class="game-container"></div>  
+  <div class="game-container">
+    <div style="display: none;">{{gameId}}</div>
+  </div>  
 </template>

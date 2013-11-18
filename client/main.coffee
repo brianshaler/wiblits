@@ -64,3 +64,13 @@ Deps.autorun =>
   body = $('body')
   body.removeClass("game")
   body.addClass("game")  if Session.get "showRoom"
+
+window.requestAnimationFrame ||= 
+  window.webkitRequestAnimationFrame || 
+  window.mozRequestAnimationFrame    || 
+  window.oRequestAnimationFrame      || 
+  window.msRequestAnimationFrame     || 
+  (callback, element) ->
+    window.setTimeout( ->
+      callback(+new Date())
+    , 1000 / 60)

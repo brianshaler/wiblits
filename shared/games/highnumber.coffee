@@ -1,7 +1,7 @@
 class @Wiblit.HighNumber extends @Wiblit.Game
   constructor: (@el) ->
     super @el
-    @duration = 3
+    @duration = 4
     @title = "High Number"
     @description = "Click the highest number"
   
@@ -21,20 +21,19 @@ class @Wiblit.HighNumber extends @Wiblit.Game
     
     div = $('<div class="highnumber">')
     div.append '<h2>Select the Highest Number</h2>'
-
+    
     _.each buttons, (value, key) =>
       b = $("<button>")
       b.addClass "btn btn-default game-select"
       b.attr "data-value", value
       b.html key
       div.append b
-      
+    
     @el.append div
-
+    
     $(".game-select", @el).click (e) =>
       val = $(e.target).attr "data-value"
       @points = val
       @selection = $(e.target).html()
       @value = @points
-      console.log "finished"
       @finish()

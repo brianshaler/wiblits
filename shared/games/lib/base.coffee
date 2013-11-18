@@ -6,11 +6,13 @@ class @Wiblit.Game
     @title = "Game Title"
     @description = "Game Description"
     
+    @started = false
+    @finished = false
+    
     @points = 0
     @progress = 0
     @lives = 0
     @selection = ""
-    @started = false
     @value = ""
     @timeoutId = null
   
@@ -21,12 +23,16 @@ class @Wiblit.Game
     console.log "Game.compareTwoResults"
     result1 > result2
   
+  @onFinish: (results) -> results
+  
   start: ->
+    @startedAt = Date.now()
     Session.set "finishedPlaying", false
     if @timeoutId
       Meteor.clearTimeout @timeoutId
     @timeoutId = Meteor.setTimeout =>
-      @finish()
+      if !@finished
+        @finish()
     , @duration*1000
   
   quit: ->
@@ -43,6 +49,9 @@ class @Wiblit.Game
       throw err if err
   
   finish: ->
+    return if @finished
+    console.log "base, broadcast FINISH"
+    @finished = true
     Session.set "finishedPlaying", true
     status =
       points: @points
