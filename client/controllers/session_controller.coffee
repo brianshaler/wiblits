@@ -13,10 +13,11 @@ Template.signup.events "click #login_twitter": (e, tmpl) ->
 Template.signup.events
   "submit #login_form": (e, t) ->
     e.preventDefault()
+    console.lo
     
     # retrieve the input field values
-    email = $("#login_email").val()
-    password = $("#login_password").val()
+    email = $("#email").val()
+    password = $("#password").val()
     # Trim and validate your fields here.... 
     
     # If validation passes, supply the appropriate fields to the
@@ -33,17 +34,17 @@ Template.signup.events
     # The user has been logged in.
     false
   "click #go_to_register": (e) ->
-    e.preventDefault()
-    Meteor.Router.to "/register"
+    el = $($(e.target).attr('data-target'))
+    el.attr('id', 'register_form')
+    $('.go-to-register').addClass('hide')
+    $('.go-to-login').removeClass('hide')
 
-
-Template.register.events
   "submit #register_form": (e, t) ->
     e.preventDefault()
 
     # retrieve the input field values
-    email = $("#account_email").val()
-    password = $("#account_password").val()
+    email = $("#email").val()
+    password = $("#password").val()
     
     # Trim and validate the input
     Accounts.createUser
@@ -64,8 +65,10 @@ Template.register.events
     false
   
   "click #go_to_login": (e) ->
-    e.preventDefault()
-    Meteor.Router.to "/login"
+    el = $($(e.target).attr('data-target'))
+    el.attr('id', 'login_form')
+    $('.go-to-register').removeClass('hide')
+    $('.go-to-login').addClass('hide')
 
   "click #register_twitter": (e, tmpl) ->
     e.preventDefault()
