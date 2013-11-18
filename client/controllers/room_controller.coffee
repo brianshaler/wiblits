@@ -93,7 +93,12 @@ Meteor.startup ->
     currentState = Session.get "roomState"
     
     Session.set "finishedPlaying", (game.results?[Meteor.userId()]?.finished == true)
+    
     if game.finished and currentState == PLAYING
+      setState WAITING
+    if room.finished and currentState == PLAYING
+      setState WAITING
+    if !room.inProgress and currentState == PLAYING
       setState WAITING
     
     if (room.starting or room.inProgress) and currentState == WAITING
