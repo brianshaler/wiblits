@@ -41,3 +41,4 @@ Template.start.events
     roomId = @.roomId
     Meteor.call "joinRoom", roomId, (err, data) ->
       Meteor.Router.to "/room/#{roomId}"
+  "click .btn-logout": -> Meteor.logout()

@@ -17,6 +17,7 @@ Template.home.events
     if Meteor.user()?
       Meteor.call "joinRoom", roomId, (err, data) ->
         Meteor.Router.to "/room/#{roomId}"
+  "click .btn-logout": -> Meteor.logout()
 
 
 Template.home.openRooms = ->
