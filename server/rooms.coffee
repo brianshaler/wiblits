@@ -11,6 +11,9 @@ Meteor.startup ->
       scheduleNewGame room
     #console.log "rooms to prune: #{rooms.length}"
   , 1000
+  Meteor.setInterval ->
+    pruneOldRooms()
+  , 30000
 
 
 # prune inactive users in waiting area
@@ -58,6 +61,25 @@ startScheduledGames = ->
         finishAt: new Date Date.now()+duration*1000
         finished: false
         results: []
+
+pruneOldRooms = ->
+  #console.log "pruning old rooms"
+  rooms = Room.find({inProgress: false, starting: false, $where: "this.players.length < 2"}).fetch()
+  ids = _.map rooms, (room) -> room.owner
+  #console.log "Rooms..", ids
+  old = new Date(Date.now() - 60*1000)
+  oldUsers = Meteor.users.find(
+    _id:
+      "$in": ids
+    lastActivity:
+      "$lt": old
+  ).fetch()
+  #console.log old, oldUsers
+  return unless oldUsers.length > 0
+  #console.log "pruning #{oldUsers.length} old rooms.."
+  _.each oldUsers, (user) ->
+    if user and user._id
+      Room.remove owner: user._id
 
 endFinishedGames = ->
   # Create a game and start it if scheduled to start
