@@ -67,7 +67,7 @@ checkCountdown = ->
     Session.set "timeLeft", timeLeft
     timeoutId = Meteor.setTimeout checkCountdown, 100
   else
-    Session.set "timeLeft", null
+    #Session.set "timeLeft", null
     Session.set "startedAt", new Date()
 
 
