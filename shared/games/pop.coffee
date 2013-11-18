@@ -3,7 +3,7 @@ BUBBLE_DURATION = 3
 class @Wiblit.Pop extends @Wiblit.Game
   constructor: (@el) ->
     super @el
-    @duration = 10
+    @duration = 8
     @title = "Pop!"
     @description = "Pop the blue bubbles! Don't pop the red ones."
   

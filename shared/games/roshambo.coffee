@@ -9,7 +9,7 @@ class @Wiblit.Roshambo extends @Wiblit.Game
   
   constructor: (@el) ->
     super @el
-    @duration = 11
+    @duration = 5
   
   @compareTwoResults: (result1, result2) ->
     return 1 if result1.selection == ""

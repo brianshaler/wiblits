@@ -53,8 +53,6 @@ Meteor.methods
     # this is a race condition waiting to happen...
     game.results[@userId] = progress
     
-    game.results = Wiblit[game.name].sortResults(game.results)
-    
     Game.update _id: game._id,
       $set:
         results: game.results

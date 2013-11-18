@@ -4,7 +4,7 @@ COUNTDOWN = 6
 Meteor.startup ->
   Meteor.setInterval ->
     startScheduledGames()
-    #endFinishedGames()
+    endFinishedGames()
     rooms = Room.find({$where: "this.players.length > 1"}).fetch()
     _.each rooms, (room) ->
       pruneActiveUsers room
@@ -65,7 +65,7 @@ endFinishedGames = ->
   _.each rooms, (room) ->
     game = Game.findOne room.game
     
-    room.results = Wiblit[game.name].sortResults(game.results)
+    #room.results = Wiblit[game.name].sortResults(game.results)
     #console.log "Okay, #{room._id} is actually starting now"
     Room.update _id: room._id,
       $set:
