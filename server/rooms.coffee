@@ -42,25 +42,34 @@ startScheduledGames = ->
   # Create a game and start it if scheduled to start
   rooms = Room.find({starting: true, inProgress: false, startAt: {$lt: new Date()}}).fetch()
   _.each rooms, (room) ->
-    game = _.clone GameSchema
-    _.extend game, Games[Math.floor Math.random()*Games.length]
-    game.roomId = room._id
-    game.players = room.players
-    gameId = Game.insert game
-    #console.log "Creating a game for room #{room._id} (#{gameId})"
+    if room.players.length < 2
+      Room.update _id: room._id,
+        $set:
+          inProgress: false
+          starting: false
+          finished: false
+          game: null
+          results: []
+    else
+      game = _.clone GameSchema
+      _.extend game, Games[Math.floor Math.random()*Games.length]
+      game.roomId = room._id
+      game.players = room.players
+      gameId = Game.insert game
+      #console.log "Creating a game for room #{room._id} (#{gameId})"
     
-    duration = 60
-    duration = game.duration if game.duration
-    duration += 10
+      duration = 60
+      duration = game.duration if game.duration
+      duration += 10
     
-    Room.update _id: room._id,
-      $set:
-        inProgress: true
-        starting: false
-        game: gameId
-        finishAt: new Date Date.now()+duration*1000
-        finished: false
-        results: []
+      Room.update _id: room._id,
+        $set:
+          inProgress: true
+          starting: false
+          game: gameId
+          finishAt: new Date Date.now()+duration*1000
+          finished: false
+          results: []
 
 pruneOldRooms = ->
   #console.log "pruning old rooms"
